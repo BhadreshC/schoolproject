@@ -15,7 +15,7 @@
       <% p "=============" %>
       <div id="principle_header" align="right">  
         <font size="5"> <% if current_principle %>  
-          Logged in as <%= current_principle.email %>.  
+          Logged in as <%= current_principle.username %>.  
           <%= link_to "Log Out", logout_path,  data: {confirm: 'Are you sure?'} %>  
         <% else %>  
           <%= link_to "Sign Up", signup_path %> or  

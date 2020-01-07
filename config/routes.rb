@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :students
+  resources :teachers
    resources :sessions, only: [:new, :create, :destroy]  
   get 'signup', to: 'principles#new', as: 'signup'  
   get 'login', to: 'sessions#new', as: 'login'  

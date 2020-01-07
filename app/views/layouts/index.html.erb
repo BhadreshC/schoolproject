@@ -13,7 +13,7 @@
 
       <div id="principle_header">  
         <% if current_principle %>  
-          Logged in as <%= current_principle.email %>.  
+          Logged in as <%= current_principle.username %>.  
           <%= link_to "Log Out", logout_path %>  
         <% else %>  
           <%= link_to "Sign Up", signup_path %> or  
