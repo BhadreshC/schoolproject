@@ -16,7 +16,24 @@
 </div>
 <br>
 <div class="princedetail">
-	<h1>PRINCIPLE HISTORY</h1>
+	<h1>PRINCIPLE HISTORY</h1><br>
+	<table align="center">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Date</th>
+    </tr>
+  </thead>
 
+  <tbody>
+    <% @principles.each do |principle| %>
+      <tr>
+        <td><%= principle.username %></td>
+        <td><%= principle.email %></td>
+        <td><%= principle.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 </div>
-

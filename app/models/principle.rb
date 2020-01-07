@@ -1,5 +1,9 @@
 class Principle < ApplicationRecord
-  belongs_to :school
+  belongs_to :school #success
+#----------------------try------------------
+
+#----------------------try------------------
+
  	has_secure_password
   validates :username,
             presence: true

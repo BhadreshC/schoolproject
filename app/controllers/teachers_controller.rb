@@ -51,8 +51,8 @@ class TeachersController < ApplicationController
 	end
 
 	private
-
-		@teacher = Teacher.find(params[:id])
+		def set_teacher
+			@teacher = Teacher.find(params[:id])
 		end
 		def teacher_params
 			params.require(:teacher).permit(:name, :email)

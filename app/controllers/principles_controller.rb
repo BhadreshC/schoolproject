@@ -1,6 +1,5 @@
 class PrinciplesController < ApplicationController
 	before_action :set_principle, only: [:show, :edit, :update, :destroy]
-
 	def index
 		@principles = Principle.all
 	end
@@ -20,7 +19,7 @@ class PrinciplesController < ApplicationController
 		respond_to do |format|
 			if @principle.save
 				session[:principle_id] = @principle.id
-				format.html { redirect_to page_index_url, notice: "#{@principle.username } PRINCIPLE CREATED." }
+				format.html { redirect_to school_index_url, notice: "#{@principle.username } PRINCIPLE CREATED." }
 				format.json { render :show, status: :created, location: @principle }
 			else
 				format.html { render :new }

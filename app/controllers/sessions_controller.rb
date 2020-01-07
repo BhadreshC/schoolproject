@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 		principle = Principle.find_by_username(params[:username])
 		if principle && principle.authenticate(params[:password])
 			session[:principle_id] = principle.id
-			redirect_to page_index_url, notice: 'Wel come to Dashboard '
+			redirect_to school_index_url
 		else
 			render :new
 		end
@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
 	private
 		def check_session_for_new_loign
 			if session[:principle_id]
-				redirect_to page_index_url, notice: 'You are Already Login'
+				redirect_to school_index_url, notice: 'You are Already Login'
 			else
 			end
 		end
