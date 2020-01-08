@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_07_050231) do
+ActiveRecord::Schema.define(version: 2020_01_08_135910) do
+
+  create_table "class_rooms", force: :cascade do |t|
+    t.string "C_Name"
+    t.integer "wichstandard"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "classrooms", force: :cascade do |t|
+    t.string "C_Name"
+    t.integer "wichstandard"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "school_id"
+    t.index ["school_id"], name: "index_classrooms_on_school_id"
+  end
 
   create_table "principles", force: :cascade do |t|
     t.string "username"
@@ -27,6 +43,8 @@ ActiveRecord::Schema.define(version: 2020_01_07_050231) do
     t.string "princile"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "classroom_id"
+    t.index ["classroom_id"], name: "index_schools_on_classroom_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -35,6 +53,13 @@ ActiveRecord::Schema.define(version: 2020_01_07_050231) do
     t.integer "standard"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "classroom_id"
+    t.index ["classroom_id"], name: "index_students_on_classroom_id"
+  end
+
+  create_table "students_teachers", id: false, force: :cascade do |t|
+    t.integer "student_id", null: false
+    t.integer "teacher_id", null: false
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -42,7 +67,13 @@ ActiveRecord::Schema.define(version: 2020_01_07_050231) do
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "student_id"
+    t.index ["student_id"], name: "index_teachers_on_student_id"
   end
 
+  add_foreign_key "classrooms", "schools"
   add_foreign_key "principles", "schools"
+  add_foreign_key "schools", "classrooms"
+  add_foreign_key "students", "classrooms"
+  add_foreign_key "teachers", "students"
 end

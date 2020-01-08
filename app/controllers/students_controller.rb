@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
-	include Checksession
-	before_action :check_session
+	#include Checksession
+	#before_action :check_session
 	before_action :set_student, only: [:show, :edit, :update, :destroy]
 
 	def index

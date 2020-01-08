@@ -1,5 +1,7 @@
-class Student < ApplicationRecord
+class Classroom < ApplicationRecord
+	require 'csv'
 	#----------------------try------------------
-	 has_and_belongs_to_many :teachers
+	has_many :students
+	has_one :school
 	#----------------------try------------------
 end
