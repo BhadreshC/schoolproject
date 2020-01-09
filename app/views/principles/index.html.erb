@@ -1,29 +1,26 @@
 <p id="notice"><%= notice %></p>
-
 <h1>Principles</h1>
-
 <table>
-  <thead>
-    <tr>
-      <th>Username</th>
-      <th>Email</th>
-      <th colspan="3">Actions</th>
-    </tr>
-  </thead>
+	<thead>
+		<tr>
+			<th>Username</th>
+			<th>Email</th>
+			<th colspan="3">Actions</th>
+		</tr>
+	</thead>
 
-  <tbody>
-    <% @principles.each do |principle| %>
-      <tr>
-        <td><%= principle.username %></td>
-        <td><%= principle.email %></td>
-        <td><%= link_to 'Show', principle %></td>
-        <td><%= link_to 'Edit', edit_principle_path(principle) %></td>
-        <td><%= link_to 'Destroy', principle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+	<tbody>
+		<% @principles.each do |principle| %>
+			<tr>
+				<td><%= principle.username %></td>
+				<td><%= principle.email %></td>
+				<td><%= link_to 'Show', principle %></td>
+				<td><%= link_to 'Edit', edit_principle_path(principle) %></td>
+				<td><%= link_to 'Destroy', principle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			</tr>
+		<% end %>
+	</tbody>
 </table>
-
 <br>
 
 <%= link_to 'New Principle', new_principle_path %>

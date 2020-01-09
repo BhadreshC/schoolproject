@@ -5,44 +5,48 @@
 		<h4 align="center">
 			NO OF TEACHERS<br><%= %><br>
 		</h4>
-	<%#= link_to "Teacher List", :controller => "teachers", :action => "index" %>
-	<%= link_to "Teacher List", teachers_path() %>
+		<%= link_to "Teacher List", teachers_path() %>
 	</div>
 
 	<div class="column" style="background-color:#bbb;">
 		<h4 align="center">
 			NO OF STUDENTS<br><%=  %><br>
 		</h4>
-	<%= link_to "Student List", :controller => "students", :action => "index" %>
+		<%= link_to "Student List", :controller => "students", :action => "index" %>
 	</div>
+
 	<div class="column" style="background-color:#ccc;">
-		<h4 >
-			NO OF CLASS<br><%= %><br>
+		<h4>
+			NO OF CLASS<br><%= @classroomscount.count %><br>
 		</h4>
-	<%= link_to "Class List", :controller => "classrooms", :action => "index" %>
+		<%= link_to "Class List", :controller => "classrooms", :action => "index" %>
 	</div>
 </div>
 <br>
 <div class="princedetail">
 	<h1>PRINCIPLE HISTORY</h1><br>
 	<table align="center">
-  <thead>
-    <tr>
-      <th>Username</th>
-      <th>Email</th>
-      <th>Date</th>
-      <th>status</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @principles.each do |principle| %>
-      <tr>
-        <td><%= principle.username %></td>
-        <td><%= principle.email %></td>
-        <td><%= principle.created_at %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+		<thead>
+			<tr>
+				<th>Username</th>
+				<th>Email</th>
+				<th>Date</th>
+				<th>status</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @principles.each do |principle| %>
+				<tr>
+					<td><%= principle.username %></td>
+					<td><%= principle.email %></td>
+					<td><%= principle.created_at %></td>
+					<% if @record.username != principle.username %>
+						<td>Deactive</td>
+					<% else %>
+						<td>Active</td>
+					<% end %>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
 </div>

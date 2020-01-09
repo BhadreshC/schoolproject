@@ -4,23 +4,22 @@ class SchoolController < ApplicationController
 	before_action :set_school, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@schools = School.all
-		# Post.order("created_at").last
+		@schools = School.includes(:Principle)
+
 	end
 
 	def edit
 	end
 
 	def show
-			
+			@classroomscount= @school.classrooms
 			@principles = Principle.order("created_at").all
-			#@most_recent = principles.order("created_at").last
+			@record = @principles.last
 			
 	end
 
 	def created_at
 		@school = School.new(school_params)
-
 		respond_to do |format|
 			if @school.save
 				format.html { redirect_to @school, notice: 'school was successfully created.' }

@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
-	#include Checksession
-	#before_action :check_session
+	include Checksession
+	before_action :check_session
 	before_action :set_student, only: [:show, :edit, :update, :destroy]
 
 	def index
@@ -57,6 +57,6 @@ class StudentsController < ApplicationController
 		end
 
 		def student_params
-			params.require(:student).permit(:name, :email, :standard)
+			params.require(:student).permit(:name, :email, :standard, :classroom_id)
 		end
 end

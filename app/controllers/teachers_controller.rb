@@ -1,14 +1,14 @@
 class TeachersController < ApplicationController
-	#include Checksession
+	include Checksession
 	before_action :set_teacher, only: [:show, :edit, :update, :destroy]
-	#before_action :check_session
+	before_action :check_session
 
 	def index
 		@teachers = Teacher.all
 		respond_to do |format|
-      format.html
-      format.csv { send_data @teachers.to_csv, filename: "teachers-#{Date.today}.csv" }
-   end
+			format.html
+			format.csv { send_data @teachers.to_csv, filename: "teachers-#{Date.today}.csv" }
+		end
 	end
 
 	def show

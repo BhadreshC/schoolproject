@@ -1,10 +1,26 @@
 <p id="notice"><%= notice %></p>
-
 <h1 align="center"> WELCOME TO <%= %> DASHBOARD OF CLASSROOM</h1>
 <div class="row" >
-
-	<div class="column" style="background-color:#aaa;" >
-
+	<div class="column" style="background-color:#aaa;">
+	<table>
+		<h2 align="center">Class Students</h2>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Email</th>
+				<th>standard</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @classstudents.each do |classstudent| %>
+				<tr>
+					<td><%= classstudent.name %></td>
+					<td><%= classstudent.email %></td>
+					<td><%= classstudent.standard %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
 	</div>
 
 	<div class="column" style="background-color:#ccc;">
@@ -14,25 +30,25 @@
 <br><br><br>
 
 <h3>
-  <strong>C name:</strong>
-  <%= @classroom.C_Name %>
+	<strong>C name:</strong>
+	<%= @classroom.C_Name %>
 </h3>
 
 <h3>
-  <strong>Wichstandard:</strong>
-  <%= @classroom.wichstandard %>
+	<strong>Wichstandard:</strong>
+	<%= @classroom.wichstandard %>
 </h3>
 <h3>
-  <strong>Limit of classroom:</strong>
+	<strong>Limit of students: 5</strong>
 </h3>
 <h3>
-  <strong>available students:</strong>
+	<strong>available students:</strong>
 </h3>
 
 <h3>
-  <strong>remaining students:</strong>
+	<strong>remaining students:</strong>
 </h3>
 
 <%= link_to 'Edit', edit_classroom_path(@classroom) %> ||
 <%= link_to 'Back', classrooms_path %>||
-<%= link_to "Download as CSV", classroom_url(:format => "csv") %>
+<%= link_to "Download as CSV", classroom_path(:format => "csv") %>

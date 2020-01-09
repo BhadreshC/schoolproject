@@ -1,43 +1,40 @@
 <%= form_with(model: principle, local: true) do |form| %>
-  <% if principle.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(principle.errors.count, "error") %> prohibited this principle from being saved:</h2>
+	<% if principle.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(principle.errors.count, "error") %> prohibited this principle from being saved:</h2>
+			<ul>
+				<% principle.errors.full_messages.each do |message| %>
+					<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<div class="field">
+		<%= form.label :username %>
+		<%= form.text_field :username %>
+	</div>
 
-      <ul>
-        <% principle.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+	<div class="field">
+		<%= form.label :schoolname %>
+		<%= form.collection_select :school_id, School.order(:name),:id, :name %>
+	</div>
 
-  <div class="field">
-    <%= form.label :username %>
-    <%= form.text_field :username %>
-  </div>
+	<div class="field">
+		<%= form.label :email %>
+		<%= form.text_field :email %>
+	</div>
 
-  <div class="field">
-    <%= form.label :schoolname %>
-    <%= form.collection_select :school_id, School.order(:name),:id, :name %>
-  
-  </div>
-  
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
+	<div class="field">
+		<%= form.label :password %>
+		<%= form.password_field :password %>
+	</div>
 
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.password_field :password %>
-  </div>
+	<div class="field">
+		<%= form.label :password_confirmation %>
+		<%= form.password_field :password_confirmation %>
+	</div>
 
-  <div class="field">
-    <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+	<div class="actions">
+		<%= form.submit %>
+	</div>
 <% end %>

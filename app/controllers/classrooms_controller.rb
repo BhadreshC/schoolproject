@@ -1,6 +1,6 @@
 class ClassroomsController < ApplicationController
-	#include Checksession
-	#before_action :check_session
+	include Checksession
+	before_action :check_session
 	before_action :set_classroom, only: [:show, :edit, :update, :destroy]
 
 	def index
@@ -9,6 +9,12 @@ class ClassroomsController < ApplicationController
 
 
 	def show
+		@classrooms= Classroom.where("school_id = ?", 1)
+		@classstudents=@classrooms.find_by_id(params[:id]).students.first(5)
+		respond_to do |format|
+			format.html
+			format.csv { send_data @classrooms.to_csv, filename: "classrooms-#{Date.today}.csv" }
+		end
 	end 
 
 	def new
@@ -58,6 +64,6 @@ class ClassroomsController < ApplicationController
 		end
 
 		def classroom_params
-			params.require(:classroom).permit(:C_Name, :wichstandard)
+			params.require(:classroom).permit(:C_Name, :wichstandard, :school_id)
 		end
 end

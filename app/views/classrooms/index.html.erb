@@ -1,28 +1,27 @@
-<h1 align="center">CLASSROOM LIST </h1>
+<h1 align="center">CLASSROOM LIST</h1>
 <table align="center">
-  <thead>
-    <tr>
-      <th>C name</th>
-      <th>Wichstandard</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+	<thead>
+		<tr>
+			<th>C name</th>
+			<th>Wichstandard</th>
+			<th colspan="3"></th>
+		</tr>
+	</thead>
 
-  <tbody>
-    <% @classrooms.each do |classroom| %>
-      <tr>
-        <td><%= classroom.C_Name %></td>
-        <td><%= classroom.wichstandard %></td>
-        <td><%= link_to 'Show', classroom %></td>
-        <td><%= link_to 'Edit', edit_classroom_path(classroom) %></td>
-        <td><%= link_to 'Destroy', classroom, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+	<tbody>
+		<% @classrooms.each do |classroom| %>
+			<tr>
+				<td><%= classroom.C_Name %></td>
+				<td><%= classroom.wichstandard %></td>
+				<td><%= link_to 'Show', classroom %></td>
+				<td><%= link_to 'Edit', edit_classroom_path(classroom) %></td>
+				<td><%= link_to 'Destroy', classroom, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			</tr>
+		<% end %>
+	</tbody>
 </table>
-
 <br>
 <h3 align="center">
-<%= link_to 'New Classroom', new_classroom_path %> |||
-<%= link_to 'BACK', school_path(id: 1) %>
+	<%= link_to 'New Classroom', new_classroom_path %> |||
+	<%= link_to 'BACK', school_path(id: 1) %>
 </h3>

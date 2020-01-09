@@ -1,33 +1,27 @@
 <p id="notice"><%= notice %></p>
-
 <h1>Teachers</h1>
-
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>No. of Student</th>
-
-      <th colspan="3">Actions</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @teachers.each do |teacher| %>
-      <tr>
-        <td><%= teacher.name %></td>
-        <td><%= teacher.email %></td>
-        <td>  </td>
-        <td><%= link_to 'Show', teacher %></td>
-        <td><%= link_to 'Edit', edit_teacher_path(teacher) %></td>
-        <td><%= link_to 'Destroy', teacher, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-
-      </tr>
-    <% end %>
-  </tbody>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Email</th>
+			<th>No. of Student</th>
+			<th colspan="3">Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @teachers.each do |teacher| %>
+			<tr>
+				<td><%= teacher.name %></td>
+				<td><%= teacher.email %></td>
+				<td></td>
+				<td><%= link_to 'Show', teacher %></td>
+				<td><%= link_to 'Edit', edit_teacher_path(teacher) %></td>
+				<td><%= link_to 'Destroy', teacher, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			</tr>
+		<% end %>
+	</tbody>
 </table>
-
 <br> <h3>
 	<%= link_to "Download as CSV", teachers_path(:format => "csv") %>|||
 	<%= link_to 'New Teacher', new_teacher_path %>|||

@@ -20,9 +20,10 @@ body {
 .column {
   float: left;
   width: 33.33%;
-  padding: 150px;
-  height: 750px; 
+  height: 750px;
+  padding: 50px !important;
 }
+
 
 /* Clear floats after the columns */
 .row:after {
@@ -32,11 +33,6 @@ body {
   clear: both;
 
 }
-.row{
-  padding-left: 360px;
-}
-
-/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
 @media (max-width: 600px) {
   .column {
     width: 100%;

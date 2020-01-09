@@ -1,35 +1,33 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Scaffold</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+	<head>
+		<title>Scaffold</title>
+		<%= csrf_meta_tags %>
+		<%= csp_meta_tag %>
+		<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+		<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+	</head>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body>
-      <% p session[:principle_id]%>
-      <div id="principle_header" align="right">  
-        <font size="5"> <% if current_principle %>  
-          Logged in as <%= current_principle.username %>.  
-          <%= link_to "Log Out", logout_path,  data: {confirm: 'Are you sure?'} %>  
-        <% else %>  
-          <%= link_to "Sign Up", signup_path %> or  
-          <%= link_to "Log In", login_path %>  
-        <% end %> 
-        </font>   
-      </div>  
-
-  <font face="times, serif" size="20">
-      <% flash.each do |key, value| %>  
-        <%= content_tag(:div, class: "alert alert-#{key}") do %>  
-          <p><%= value %></p>  
-        <% end %>  
-      <% end %>  
-  </font>
-    <%= yield %>
-
-  </body>
+	<body>
+		<% p session[:principle_id]%>
+		<div id="principle_header" align="right">
+			<font size="5">
+				<% if current_principle %>
+					Logged in as <%= current_principle.username %>
+					<%= link_to "Log Out", logout_path,  data: {confirm: 'Are you sure?'} %>
+				<% else %>
+					<%= link_to "Sign Up", signup_path %> or
+					<%= link_to "Log In", login_path %>
+				<% end %>
+			</font>
+		</div>
+		<font face="times, serif" size="20">
+			<% flash.each do |key, value| %>
+				<%= content_tag(:div, class: "alert alert-#{key}") do %>
+					<p><%= value %></p>
+				<% end %>
+			<% end %>
+		</font>
+		<%= yield %>
+	</body>
 </html>
