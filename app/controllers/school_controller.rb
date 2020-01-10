@@ -4,17 +4,16 @@ class SchoolController < ApplicationController
 	before_action :set_school, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@schools = School.includes(:Principle)
-
+		@schools = School.all
 	end
-
+	
 	def edit
 	end
 
 	def show
-			@classroomscount= @school.classrooms
-			@principles = Principle.order("created_at").all
-			@record = @principles.last
+		@classroomscount= @school.classrooms
+		@principles = Principle.order("created_at").all
+		@record = @principles.last
 			
 	end
 
@@ -59,5 +58,4 @@ class SchoolController < ApplicationController
 		def school_params
 			params.require(:school).permit(:name, :princile)
 		end
-		
 end

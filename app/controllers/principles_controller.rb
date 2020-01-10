@@ -1,6 +1,6 @@
 class PrinciplesController < ApplicationController
 	include Checksession
-	before_action :check_session
+	before_action :check_session_for_principle, only:[:index]
 	before_action :set_principle, only: [:show, :edit, :update, :destroy]
 	def index
 		@principles = Principle.all
@@ -55,7 +55,7 @@ class PrinciplesController < ApplicationController
 			@principle = Principle.find(params[:id])
 		end
 
-	def principle_params
+		def principle_params
 			params.require(:principle).permit(:username, :email, :password, :password_confirmation,:school_id)
 		end
 end

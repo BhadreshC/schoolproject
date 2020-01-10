@@ -9,18 +9,22 @@
 			</ul>
 		</div>
 	<% end %>
+
 	<div class="field">
 		<%= form.label :C_Name %>
 		<%= form.text_field :C_Name %>
 	</div>
+
 	<div class="field">
 		<%= form.label :wichstandard %>
 		<%= form.text_field :wichstandard %>
 	</div>
+
 	<div class="field">
 		<%= form.label :school_id %>
 		<%= form.collection_select :school_id, School.order(:name),:id, :name %>
 	</div>
+	
 	<div class="actions">
 		<%= form.submit %>
 	</div>

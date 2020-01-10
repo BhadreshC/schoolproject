@@ -8,7 +8,6 @@
 			<th colspan="3">Actions</th>
 		</tr>
 	</thead>
-
 	<tbody>
 		<% @principles.each do |principle| %>
 			<tr>
@@ -22,5 +21,7 @@
 	</tbody>
 </table>
 <br>
-
-<%= link_to 'New Principle', new_principle_path %>
+<h3>
+	<%= link_to 'New Principle', new_principle_path %> |||
+	<%= link_to 'Back to Home', root_path %>
+</h3>

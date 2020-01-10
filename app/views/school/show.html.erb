@@ -41,9 +41,9 @@
 					<td><%= principle.email %></td>
 					<td><%= principle.created_at %></td>
 					<% if @record.username != principle.username %>
-						<td>Deactive</td>
+						<td>Disable</td>
 					<% else %>
-						<td>Active</td>
+						<td>( Current )</td>
 					<% end %>
 				</tr>
 			<% end %>

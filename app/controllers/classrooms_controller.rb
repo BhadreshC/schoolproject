@@ -6,11 +6,10 @@ class ClassroomsController < ApplicationController
 	def index
 		@classrooms = Classroom.all
 	end
-
-
 	def show
+		
 		@classrooms= Classroom.where("school_id = ?", 1)
-		@classstudents=@classrooms.find_by_id(params[:id]).students.first(5)
+		@classstudents=@classrooms.find_by_id(params[:id]).students
 		respond_to do |format|
 			format.html
 			format.csv { send_data @classrooms.to_csv, filename: "classrooms-#{Date.today}.csv" }

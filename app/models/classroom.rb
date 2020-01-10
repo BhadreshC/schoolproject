@@ -1,12 +1,11 @@
 class Classroom < ApplicationRecord
 	require 'csv'
-	#----------------------try------------------
-	has_many :students
+	has_many :students, before_add: :validate_student_limit
 	has_one :school
-	has_many :teachers
-	#----------------------tryover ------------------
 	validates :C_Name, presence: true, uniqueness: true
 	validates :wichstandard, length: {minimum: 1, maximum: 12}, allow_blank: false, presence: true
+	
+	NUMBER_OF_PERMITTED_STUDENTS = 5
 
 	def self.to_csv
 		CSV.generate do |csv|
@@ -24,5 +23,9 @@ class Classroom < ApplicationRecord
 				end
 			end
 		end
+	end
+
+	def validate_student_limit(student)
+		raise Exception.new if students.size >= NUMBER_OF_PERMITTED_STUDENTS
 	end
 end
