@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
 		session[:principle_id] = nil
 		redirect_to root_url, notice: 'Logged out!'
 	end
-	
+
 	private
 		def check_session_for_new_loign
 			if session[:principle_id]

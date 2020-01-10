@@ -1,14 +1,16 @@
 class ClassroomsController < ApplicationController
 	include Checksession
 	before_action :check_session
+	before_action :set_school
 	before_action :set_classroom, only: [:show, :edit, :update, :destroy]
 
+
 	def index
-		@classrooms = Classroom.all
+		@classrooms = @school.classrooms
 	end
 	def show
 		
-		@classrooms= Classroom.where("school_id = ?", 1)
+		@classrooms= @school.classrooms
 		@classstudents=@classrooms.find_by_id(params[:id]).students
 		respond_to do |format|
 			format.html
@@ -17,18 +19,16 @@ class ClassroomsController < ApplicationController
 	end 
 
 	def new
-		@classroom = Classroom.new
+		@classroom = @school.classrooms.new
 	end
 
-	def edit
-		
-	end
+	def edit; end
 
 	def create
-		@classroom = Classroom.new(classroom_params)
+		@classroom = @school.classrooms.new(classroom_params)
 		respond_to do |format|
 			if @classroom.save
-				format.html { redirect_to @classroom, notice: 'Classroom was successfully created.' }
+				format.html { redirect_to school_classroom_path(@school, @classroom), notice: 'Classroom was successfully created.' }
 				format.json { render :show, status: :created, location: @classroom }
 			else
 				format.html { render :new }
@@ -58,8 +58,12 @@ class ClassroomsController < ApplicationController
 
 	private
 
+		def set_school
+			@school = School.find_by(id: params[:school_id])
+		end
+
 		def set_classroom
-			@classroom = Classroom.find(params[:id])
+			@classroom = @school.classrooms.find_by(id: params[:id])
 		end
 
 		def classroom_params

@@ -12,16 +12,16 @@
 			<tr>
 				<td><%= classroom.C_Name %></td>
 				<td><%= classroom.wichstandard %></td>
-				<td><%= link_to 'Show', classroom %></td>
-				<td><%= link_to 'Edit', edit_classroom_path(classroom) %></td>
-				<td><%= link_to 'Destroy', classroom, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				<td><%= link_to 'Show', school_classroom_path(@school, classroom) %></td>
+				<td><%= link_to 'Edit', edit_school_classroom_path(@school, classroom) %></td>
+				<td><%= link_to 'Destroy', school_classroom_path(@school, classroom), method: :delete, data: { confirm: 'Are you sure?' } %></td>
 			</tr>
 		<% end %>
 	</tbody>
 </table>
 <br>
 <h3 align="center">
-	<%= link_to 'New Classroom', new_classroom_path %> |||
+	<%= link_to 'New Classroom', new_school_classroom_path(@school.id) %> |||
 	<%= link_to 'View All Teachers ', teachers_path %> |||
 	<%= link_to 'View All Students ', students_path %> |||
 	<%= link_to 'BACK', school_path(id: 1) %>

@@ -1,7 +1,7 @@
 class Classroom < ApplicationRecord
 	require 'csv'
 	has_many :students, before_add: :validate_student_limit
-	has_one :school
+	belongs_to :school
 	validates :C_Name, presence: true, uniqueness: true
 	validates :wichstandard, length: {minimum: 1, maximum: 12}, allow_blank: false, presence: true
 	
