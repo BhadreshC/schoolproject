@@ -44,7 +44,11 @@
 					<td><%= principle.username %></td>
 					<td><%= principle.email %></td>
 					<td><%= principle.created_at %></td>
-					
+					<% if current_principle.username == principle.username %>
+						<td> Active</td>
+					<% else %>
+						<td> Deactive</td>
+					<% end %>
 				</tr>
 			<% end %>
 		</tbody>

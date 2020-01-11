@@ -1,4 +1,5 @@
 class ClassroomsController < ApplicationController
+
 	include Checksession
 	before_action :check_session
 	before_action :set_school

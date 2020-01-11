@@ -1,6 +1,6 @@
 class Teacher < ApplicationRecord
 	require 'csv'
-	has_many :students
+	has_many :student
 
 	def self.to_csv
 		attributes = %w{id name email }
