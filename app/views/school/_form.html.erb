@@ -1,12 +1,12 @@
 <%= form_with(model: school, local: true) do |form| %>
 	<div class="field">
 		<%= form.label :name %>
-		<%= form.text_field :name %>
+		<%= form.text_field :name, required: true%>
 	</div>
 
 	<div class="field">
 		<%= form.label :princile%>
-		<%= form.text_field :princile %>
+		<%= form.text_field :princile, required: true %>
 	</div>
 
 	<div class="actions">

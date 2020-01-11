@@ -26,7 +26,8 @@ class TeachersController < ApplicationController
 		@teacher = Teacher.new(teacher_params)
 		respond_to do |format|
 			if @teacher.save
-				format.html { redirect_to @teacher, notice: 'Teacher was successfully created.' }
+				format.html { redirect_to school_classroom_path(@school, @teacher), notice: 'Teacher was successfully created.' }
+
 				format.json { render :show, status: :created, location: @teacher }
 			else
 				format.html { render :new }
@@ -40,7 +41,7 @@ class TeachersController < ApplicationController
 		if @teacher.update(teacher_params)
 			format.html { redirect_to @teacher, notice: 'Teacher was successfully updated.' }
 			format.json { render :show, status: :ok, location: @teacher }
-		else
+		els
 			format.html { render :edit }
 			format.json { render json: @teacher.errors, status: :unprocessable_entity }
 			end
@@ -50,7 +51,7 @@ class TeachersController < ApplicationController
 	def destroy
 		@teacher.destroy
 		respond_to do |format|
-			format.html { redirect_to teachers_url, notice: 'Teacher was successfully destroyed.' }
+			format.html { redirect_to school_teachers_url, notice: 'Teacher was successfully destroyed.' }
 			format.json { head :no_content }
 		end
 	end
@@ -61,9 +62,9 @@ class TeachersController < ApplicationController
 		end
 
 		def set_teacher
-			@teacher = Teacher.find(params[:id])
+			@teacher = Teacher.find_by(id: params[:id])
 		end
 		def teacher_params
-			params.require(:teacher).permit(:name, :email)
+			params.require(:teacher).permit(:name, :email, :Mobile_No, :qualification,:gender)
 		end
 end

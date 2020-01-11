@@ -12,14 +12,29 @@
 
 	<div class="field">
 		<%= form.label :name %>
-		<%= form.text_field :name %>
+		<%= form.text_field :name, required: true, :placeholder => "Your name"%>
 	</div>
 
 	<div class="field">
 		<%= form.label :email %>
-		<%= form.text_field :email %>
+		<%= form.text_field :email, required: true, :placeholder => "Enter Email" %>
 	</div>
 
+	<div class="field">
+		<%= form.label :Mobile_No %>
+		<%= form.text_field :Mobile_No, required: true, :placeholder => "Your phone number"%>
+	</div>
+	<div class="field">	
+		<%= form.label :qualification %>
+		<%= form.text_field :qualification, required: true, :placeholder => "Enter Your qualification"%>
+	</div>
+	 <div class="field">
+    <%= form.label :gender %> <br>
+    <%= form.label :gender, "Male"%>
+    <%= form.radio_button :gender, :Male%>
+    <%= form.label :gender, "Female" %>
+    <%= form.radio_button :gender, :Female, checked: true %>
+  </div>
 	<div class="actions">
 		<%= form.submit %>
 	</div>

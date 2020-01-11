@@ -1,5 +1,6 @@
 class PrinciplesController < ApplicationController
 	include Checksession
+	before_action :set_school
 	before_action :check_session_for_principle, only:[:index]
 	before_action :set_principle, only: [:show, :edit, :update, :destroy]
 	def index
@@ -45,14 +46,17 @@ class PrinciplesController < ApplicationController
 	def destroy
 		@principle.destroy
 		respond_to do |format|
-			format.html { redirect_to principles_url, notice: 'Principle was successfully destroyed.' }
+			format.html { redirect_to school_principles_url, notice: 'Principle was successfully destroyed.' }
 			format.json { head :no_content }
 		end
 	end
 
 	private
+		def set_school
+			@school = School.find_by(id: params[:school_id])
+		end
 		def set_principle
-			@principle = Principle.find(params[:id])
+			@principle = Principle.find_by(id: params[:id])
 		end
 
 		def principle_params

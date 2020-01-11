@@ -8,8 +8,8 @@ module Studentable
 	end
 
 	def index
-		@students = Student.includes(:classroom)
-
+		#@students = Student.includes(:classroom)
+		@students = Student.joins(:classroom).where("classrooms.school_id = ? " , @school)
 	end
 
 	def show
@@ -18,6 +18,8 @@ module Studentable
 
 	def new
 		@student = Student.new
+		@schoolclassrooms = @school.classrooms.all
+
 	end
 
 	def edit
@@ -52,7 +54,7 @@ module Studentable
 	def destroy
 		@student.destroy
 		respond_to do |format|
-			format.html { redirect_to students_url, notice: 'Student was successfully destroyed.' }
+			format.html { redirect_to school_students_url, notice: 'Student was successfully destroyed.' }
 			format.json { head :no_content }
 		end
 	end
@@ -62,7 +64,7 @@ module Studentable
 				@school = School.find_by(id: params[:school_id])
 		end
 		def set_student
-			@student = Student.find(params[:id])
+			@student = Student.find_by(id: params[:id])
 		end
 
 		def student_params

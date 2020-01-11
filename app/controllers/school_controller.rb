@@ -11,10 +11,9 @@ class SchoolController < ApplicationController
 	end
 
 	def show
+		@no_of_student=Student.joins(:classroom).where("classrooms.school_id = ? " , params[:id])
 		@classroomscount= @school.classrooms
-		@principles = Principle.order("created_at").all
-		@record = @principles.last
-			
+		@schoolprinciple= @school.principles.order("created_at").all
 	end
 
 	def created_at
@@ -52,7 +51,7 @@ class SchoolController < ApplicationController
 
 	private
 		def set_school
-			@school = School.find(params[:id])
+			@school = School.find_by(id: params[:id])
 		end
 
 		def school_params
