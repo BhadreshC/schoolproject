@@ -7,21 +7,25 @@ class Classroom < ApplicationRecord
 	
 	NUMBER_OF_PERMITTED_STUDENTS = 5
 
-	def self.to_csv
+	def to_csv
 		CSV.generate do |csv|
-			csv << ["C_Name", "wichstandard", "created_at", "updated_at", "students_Of_class", "EmailAddress of student"]
-			all.each do |classroom|
-				if classroom.students.any?
-					column = [classroom.C_Name, classroom.wichstandard, classroom.created_at, classroom.updated_at]
-					stdnames = classroom.students.collect { |o| o.name }.join(", ")
-					emails = classroom.students.collect { |o| o.email }.join(", ")
-					column << stdnames
-					column << emails
-					csv << column
-				else
-					csv << [classroom.C_Name, classroom.wichstandard, classroom.created_at, classroom.updated_at]
-				end
+			csv << ["Name", "Email", "created_at", "updated_at"]
+			self.students.each do |student|
+				column = [student.name, student.email, student.created_at, student.updated_at]
+				csv << column
 			end
+			# all.each do |classroom|
+			# 	if classroom.students.any?
+			# 		column = [classroom.C_Name, classroom.wichstandard, classroom.created_at, classroom.updated_at]
+			# 		# stdnames = classroom.students.collect { |o| o.name }.join(", ")
+			# 		# emails = classroom.students.collect { |o| o.email }.join(", ")
+			# 		# column << stdnames
+			# 		# column << emails
+			# 		csv << column
+			# 	else
+			# 		csv << [classroom.C_Name, classroom.wichstandard, classroom.created_at, classroom.updated_at]
+			# 	end
+			# end
 		end
 	end
 
