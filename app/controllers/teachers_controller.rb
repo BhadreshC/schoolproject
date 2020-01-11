@@ -1,6 +1,7 @@
 class TeachersController < ApplicationController
 	include Checksession
 	before_action :set_teacher, only: [:show, :edit, :update, :destroy]
+	before_action :set_school
 	before_action :check_session
 
 	def index
@@ -55,6 +56,10 @@ class TeachersController < ApplicationController
 	end
 
 	private
+		def set_school
+				@school = School.find_by(id: params[:school_id])
+		end
+
 		def set_teacher
 			@teacher = Teacher.find(params[:id])
 		end

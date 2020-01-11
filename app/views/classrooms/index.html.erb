@@ -22,7 +22,5 @@
 <br>
 <h3 align="center">
 	<%= link_to 'New Classroom', new_school_classroom_path(@school.id) %> |||
-	<%= link_to 'View All Teachers ', teachers_path %> |||
-	<%= link_to 'View All Students ', students_path %> |||
-	<%= link_to 'BACK', school_path(id: 1) %>
+	<%= link_to "Back", school_path(@school) %>
 </h3>

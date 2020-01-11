@@ -5,21 +5,22 @@
 		<h4 align="center">
 			NO OF TEACHERS<br><%= %><br>
 		</h4>
-		<%= link_to "Teacher List", teachers_path() %>
+		<%= link_to "Teacher List", school_teachers_path(@school) %>
 	</div>
 
 	<div class="column" style="background-color:#bbb;">
 		<h4 align="center">
 			NO OF STUDENTS<br><%=  %><br>
 		</h4>
-		<%= link_to "Student List", :controller => "students", :action => "index" %>
+		<%= link_to "Student List", school_students_path(@school)%>
+
 	</div>
 
 	<div class="column" style="background-color:#ccc;">
 		<h4>
 			NO OF CLASS<br><%= @classroomscount.count %><br>
 		</h4>
-		<%= link_to "Class List", :controller => "classrooms", :action => "index" %>
+		<%= link_to "Class List", school_classrooms_path(@school)%>
 	</div>
 </div>
 <br>

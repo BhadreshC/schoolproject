@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Students</h1>
+<h1 align="center">Students</h1>
 
-<table>
+<table align="center">
 	<thead>
 		<tr>
 			<th>Name</th>
@@ -19,17 +19,15 @@
 				<td><%= student.email %></td>
 				<td><%= student.standard %></td>
 				<td><%= student.classroom.C_Name%></td>
-				<td><%= link_to 'Show', student %></td>
-				<td><%= link_to 'Edit', edit_student_path(student) %></td>
-				<td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				<td><%= link_to 'Show',school_student_path(@school, student)%></td>
+				<td><%= link_to 'Edit', edit_school_student_path(@school ,student) %></td>
+				<td><%= link_to 'Destroy', school_student_path(@school, student), method: :delete, data: { confirm: 'Are you sure?' } %></td>
 			</tr>
 		<% end %>
 	</tbody>
 </table>
 <br>
-<h3>
-	<%= link_to 'New Student', new_student_path %> |||||
-	<%= link_to 'View Teachers ', teachers_path %> |||||
-	<%= link_to 'View All Classroom ', classrooms_path %> |||
-	<%= link_to 'BACK', school_path(id: 1) %>
-</h3>
+<h2 align="center">
+	<%= link_to "Back", school_path(@school) %>
+</h2>
+

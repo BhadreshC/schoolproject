@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
-<h1>Teachers</h1>
-<table>
+<h1 align="center">Teachers</h1>
+<table align="center">
 	<thead>
 		<tr>
 			<th>Name</th>
@@ -15,18 +15,14 @@
 				<td><%= teacher.name %></td>
 				<td><%= teacher.email %></td>
 				<td></td>
-				<td><%= link_to 'Show', teacher %></td>
-				<td><%= link_to 'Edit', edit_teacher_path(teacher) %></td>
-				<td><%= link_to 'Destroy', teacher, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				<td><%= link_to 'Show', school_teacher_path(@school, teacher) %></td>
+				<td><%= link_to 'Edit', edit_school_teacher_path(@school, teacher) %></td>
+				<td><%= link_to 'Destroy', school_teacher_path(@school, teacher), method: :delete, data: { confirm: 'Are you sure?' } %></td>
 			</tr>
 		<% end %>
 	</tbody>
 </table>
+<h2 align="center"> 
+	<%= link_to "Back", school_path(@school) %>
+</h2>
 <br>
-<h3>
-	<%= link_to "Download as CSV", teachers_path(:format => "csv") %>|||
-	<%= link_to 'New Teacher', new_teacher_path %>|||
-	<%= link_to 'View All Classroom ', classrooms_path %> |||
-	<%= link_to 'View All Students', students_path %>|||
-	<%= link_to 'BACK', school_path(id: 1) %>
-</h3>

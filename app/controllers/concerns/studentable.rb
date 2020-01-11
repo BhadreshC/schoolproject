@@ -3,6 +3,8 @@ module Studentable
 	included do
 		before_action :check_session
 		before_action :set_student, only: [:show, :edit, :update, :destroy]
+		before_action :set_school
+
 	end
 
 	def index
@@ -56,6 +58,9 @@ module Studentable
 	end
 
 	private
+		def set_school
+				@school = School.find_by(id: params[:school_id])
+		end
 		def set_student
 			@student = Student.find(params[:id])
 		end

@@ -14,5 +14,6 @@
 	<strong>No of student:</strong>
 	<%= %>
 </p>
-<%= link_to 'Edit', edit_teacher_path(@teacher) %> |
-<%= link_to 'Back', teachers_path %>
+
+<%= link_to 'Edit', edit_school_teacher_path(@school, @teacher) %>
+<%= link_to 'Back', school_teachers_path(@school) %>
