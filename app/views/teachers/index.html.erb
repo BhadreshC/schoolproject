@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 <h1 align="center">Teachers</h1>
 <table align="center">
 	<thead>
@@ -6,6 +5,9 @@
 			<th>Name</th>
 			<th>Email</th>
 			<th>No. of Student</th>
+			<th>Qualification</th>
+			<th>Mobile No.</th>
+			<th>gender</th>
 			<th colspan="3">Actions</th>
 		</tr>
 	</thead>
@@ -14,7 +16,10 @@
 			<tr>
 				<td><%= teacher.name %></td>
 				<td><%= teacher.email %></td>
-				<td></td>
+				<td><%= %></td>
+				<td><%= teacher.qualification %></td>
+				<td><%= teacher.Mobile_No %></td>
+				<td><%= teacher.gender %></td>
 				<td><%= link_to 'Show', school_teacher_path(@school, teacher) %></td>
 				<td><%= link_to 'Edit', edit_school_teacher_path(@school, teacher) %></td>
 				<td><%= link_to 'Destroy', school_teacher_path(@school, teacher), method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -1,23 +1,21 @@
 class ClassroomsController < ApplicationController
-
 	include Checksession
 	before_action :check_session
 	before_action :set_school
 	before_action :set_classroom, only: [:show, :edit, :update, :destroy]
 
-
 	def index
 		@classrooms = @school.classrooms
 	end
+
 	def show
-		
 		@classrooms= @school.classrooms
 		@classstudents=@classrooms.find_by_id(params[:id]).students
 		respond_to do |format|
 			format.html
 			format.csv { send_data @classrooms.to_csv, filename: "classrooms-#{Date.today}.csv" }
 		end
-	end 
+	end
 
 	def new
 		@classroom = @school.classrooms.new
@@ -41,7 +39,7 @@ class ClassroomsController < ApplicationController
 	def update
 		respond_to do |format|
 			if @classroom.update(classroom_params)
-				format.html { redirect_to @classroom, notice: 'Classroom was successfully updated.' }
+				format.html { redirect_to school_classroom_path(@school, @classroom), notice: 'Classroom was successfully updated.' }
 				format.json { render :show, status: :ok, location: @classroom }
 			else
 				format.html { render :edit }
@@ -49,6 +47,7 @@ class ClassroomsController < ApplicationController
 			end
 		end
 	end
+
 	def destroy
 		@classroom.destroy
 		respond_to do |format|
@@ -58,7 +57,6 @@ class ClassroomsController < ApplicationController
 	end
 
 	private
-
 		def set_school
 			@school = School.find_by(id: params[:school_id])
 		end

@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
-	before_action :check_session_for_new_loign,  only: [:new]
+	before_action :check_session_for_new_loign, only: [:new]
+	before_action :check_for_last_principle, only: [:create]
 	def new
 	end
 
@@ -11,7 +12,7 @@ class SessionsController < ApplicationController
 		else
 			render :new
 		end
-	end
+	end 
 
 	def destroy
 		session[:principle_id] = nil
@@ -23,6 +24,14 @@ class SessionsController < ApplicationController
 			if session[:principle_id]
 				redirect_to school_index_url, notice: 'You are Already Login'
 			else
+			end
+		end
+		def check_for_last_principle
+			@prince= Principle.where("school_id = ?", 1).last
+			@usernames= @prince.username
+			if params[:username] == @usernames
+			else
+				render :new
 			end
 		end
 end

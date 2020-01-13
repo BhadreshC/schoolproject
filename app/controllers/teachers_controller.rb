@@ -5,7 +5,7 @@ class TeachersController < ApplicationController
 	before_action :check_session
 
 	def index
-		@teachers = Teacher.all
+		@teachers = Teacher.joins(:classroom).where("classrooms.school_id = ? " , @school)
 		respond_to do |format|
 			format.html
 			format.csv { send_data @teachers.to_csv, filename: "teachers-#{Date.today}.csv" }
@@ -17,6 +17,7 @@ class TeachersController < ApplicationController
 
 	def new
 		@teacher = Teacher.new
+		@schoolclassrooms = @school.classrooms.all
 	end
 
 	def edit
@@ -26,8 +27,7 @@ class TeachersController < ApplicationController
 		@teacher = Teacher.new(teacher_params)
 		respond_to do |format|
 			if @teacher.save
-				format.html { redirect_to school_classroom_path(@school, @teacher), notice: 'Teacher was successfully created.' }
-
+				format.html { redirect_to school_teacher_path(@school, @teacher), notice: 'Teacher was successfully created.' }
 				format.json { render :show, status: :created, location: @teacher }
 			else
 				format.html { render :new }
@@ -39,9 +39,9 @@ class TeachersController < ApplicationController
 	def update
 		respond_to do |format|
 		if @teacher.update(teacher_params)
-			format.html { redirect_to @teacher, notice: 'Teacher was successfully updated.' }
+			format.html { redirect_to school_teacher_path(@school, @teacher), notice: 'Teacher was successfully updated.' }
 			format.json { render :show, status: :ok, location: @teacher }
-		els
+		else
 			format.html { render :edit }
 			format.json { render json: @teacher.errors, status: :unprocessable_entity }
 			end
@@ -58,13 +58,12 @@ class TeachersController < ApplicationController
 
 	private
 		def set_school
-				@school = School.find_by(id: params[:school_id])
+			@school = School.find_by(id: params[:school_id])
 		end
-
 		def set_teacher
 			@teacher = Teacher.find_by(id: params[:id])
 		end
 		def teacher_params
-			params.require(:teacher).permit(:name, :email, :Mobile_No, :qualification,:gender)
+			params.require(:teacher).permit(:name, :email, :Mobile_No, :qualification,:gender,:classroom_id, :student_ids)
 		end
 end

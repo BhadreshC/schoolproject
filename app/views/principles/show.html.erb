@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 <p>
 	<strong>Username:</strong>
 	<%= @principle.username %>
@@ -6,6 +5,10 @@
 <p>
 	<strong>Email:</strong>
 	<%= @principle.email %>
+</p>
+<p>
+	<strong>School Name:</strong>
+	<%= @principle.school.name %>
 </p>
 
 <%= link_to 'Edit', edit_principle_path(@principle) %> |

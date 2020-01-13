@@ -5,6 +5,7 @@ module Checksession
 			redirect_to  root_url, notice: 'login is required.'
 		end
 	end
+
 	def check_session_for_principle
 		if session[:principle_id]
 			redirect_to  root_url, notice: 'login is required.'

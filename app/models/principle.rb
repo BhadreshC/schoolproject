@@ -4,4 +4,8 @@ class Principle < ApplicationRecord
 	validates :username, presence: true
 	validates_uniqueness_of :username
 	validates :email, presence: true, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
+
+	def active_for_authentication?
+		super && status
+	end
 end

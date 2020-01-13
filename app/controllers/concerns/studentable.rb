@@ -4,11 +4,9 @@ module Studentable
 		before_action :check_session
 		before_action :set_student, only: [:show, :edit, :update, :destroy]
 		before_action :set_school
-
 	end
 
 	def index
-		#@students = Student.includes(:classroom)
 		@students = Student.joins(:classroom).where("classrooms.school_id = ? " , @school)
 	end
 
@@ -19,18 +17,16 @@ module Studentable
 	def new
 		@student = Student.new
 		@schoolclassrooms = @school.classrooms.all
-
 	end
 
-	def edit
-	end
+	def edit; end
 
 	def create
 		@student = Student.new(student_params)
-
+		@schoolclassrooms = @school.classrooms.all
 		respond_to do |format|
 			if @student.save
-				format.html { redirect_to @student, notice: 'Student was successfully created.' }
+				format.html { redirect_to school_student_path(@school, @student), notice: 'Student was successfully created.' }
 				format.json { render :show, status: :created, location: @student }
 			else
 				format.html { render :new }
@@ -61,7 +57,7 @@ module Studentable
 
 	private
 		def set_school
-				@school = School.find_by(id: params[:school_id])
+			@school = School.find_by(id: params[:school_id])
 		end
 		def set_student
 			@student = Student.find_by(id: params[:id])

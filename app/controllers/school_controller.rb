@@ -4,20 +4,20 @@ class SchoolController < ApplicationController
 	before_action :set_school, only: [:show, :edit, :update, :destroy]
 
 	def index
-		 @school = current_principle.school
+		@school = current_principle.school
 	end
-	
-	def edit
-	end
+
+	def edit;end
 
 	def show
 		@no_of_student=Student.joins(:classroom).where("classrooms.school_id = ? " , params[:id])
+		@no_of_teacher=Teacher.joins(:classroom).where("classrooms.school_id = ? " , params[:id])
 		@classroomscount= @school.classrooms
 		@schoolprinciple= @school.principles.order("created_at").all
 	end
-	def new 
+
+	def new
 		@schoolclassrooms = @school.classrooms
-		
 	end
 
 	def created_at

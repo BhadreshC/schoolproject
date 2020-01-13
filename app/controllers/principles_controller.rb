@@ -1,7 +1,7 @@
 class PrinciplesController < ApplicationController
-	include Checksession
-	before_action :set_school
-	before_action :check_session_for_principle, only:[:index]
+	#include Checksession
+	#before_action :set_school
+	#before_action :check_session_for_principle, only:[:index]
 	before_action :set_principle, only: [:show, :edit, :update, :destroy]
 	def index
 		@principles = Principle.all
@@ -46,7 +46,7 @@ class PrinciplesController < ApplicationController
 	def destroy
 		@principle.destroy
 		respond_to do |format|
-			format.html { redirect_to school_principles_url, notice: 'Principle was successfully destroyed.' }
+			format.html { redirect_to principles_url, notice: 'Principle was successfully destroyed.' }
 			format.json { head :no_content }
 		end
 	end
@@ -62,4 +62,14 @@ class PrinciplesController < ApplicationController
 		def principle_params
 			params.require(:principle).permit(:username, :email, :password, :password_confirmation,:school_id)
 		end
+
+		def deactivate
+			principle = Principle.find(params[:principle_id])
+			if current_principle.status?
+				principle.deactivate_account!
+				redirect_to principles_path 
+		else
+				redirect_to :back
+		end
+end
 end

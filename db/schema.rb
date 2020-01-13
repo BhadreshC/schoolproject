@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_11_081817) do
+ActiveRecord::Schema.define(version: 2020_01_13_122318) do
 
   create_table "classrooms", force: :cascade do |t|
     t.string "C_Name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2020_01_11_081817) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "school_id"
+    t.boolean "status"
     t.index ["school_id"], name: "index_principles_on_school_id"
   end
 
@@ -62,11 +63,14 @@ ActiveRecord::Schema.define(version: 2020_01_11_081817) do
     t.string "Mobile_No"
     t.string "qualification"
     t.string "gender", default: "Male"
+    t.integer "classroom_id"
+    t.index ["classroom_id"], name: "index_teachers_on_classroom_id"
     t.index ["student_id"], name: "index_teachers_on_student_id"
   end
 
   add_foreign_key "classrooms", "schools"
   add_foreign_key "principles", "schools"
   add_foreign_key "students", "classrooms"
+  add_foreign_key "teachers", "classrooms"
   add_foreign_key "teachers", "students"
 end
