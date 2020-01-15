@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-	# resources :school
 	resources :principles
 	resources :sessions, only: [:new, :create, :destroy]
 	post "/deactivate", to: "principles#deactivate"

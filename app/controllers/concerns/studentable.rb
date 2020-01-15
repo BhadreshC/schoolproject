@@ -59,6 +59,7 @@ module Studentable
 		def set_school
 			@school = School.find_by(id: params[:school_id])
 		end
+
 		def set_student
 			@student = Student.find_by(id: params[:id])
 		end

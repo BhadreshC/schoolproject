@@ -27,7 +27,7 @@
 
 	<div class="field">
 		<%= form.label :classroom_id %>
-		<%= form.collection_select :classroom_id, @schoolclassrooms.order(:C_Name),:id, :C_Name, {:prompt => "--select classroom--"}%>
+		<%= form.collection_select :classroom_id, @schoolclassrooms.order(:C_Name),:id, :C_Name, {:prompt => "--select classroom--"}, required: true %>
 	</div>
 
 	<div class="actions">

@@ -12,16 +12,14 @@ class TeachersController < ApplicationController
 		end
 	end
 
-	def show
-	end
+	def show; end
 
 	def new
 		@teacher = Teacher.new
 		@schoolclassrooms = @school.classrooms.all
 	end
 
-	def edit
-	end
+	def edit; end
 
 	def create
 		@teacher = Teacher.new(teacher_params)
@@ -60,9 +58,11 @@ class TeachersController < ApplicationController
 		def set_school
 			@school = School.find_by(id: params[:school_id])
 		end
+
 		def set_teacher
 			@teacher = Teacher.find_by(id: params[:id])
 		end
+
 		def teacher_params
 			params.require(:teacher).permit(:name, :email, :Mobile_No, :qualification,:gender,:classroom_id, :student_ids)
 		end

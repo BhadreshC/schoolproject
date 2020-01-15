@@ -23,7 +23,29 @@
 	</div>
 
 	<div class="column" style="background-color:#ccc;">
-		<h3></h3>
+		<table>
+		<h2 align="center">Class Teachers</h2>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Mobile_No</th>
+				<th>qualification</th>
+				<th>gender</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @classteachers.each do |classteacher| %>
+				<tr>
+					<td><%= classteacher.name %></td>
+					<td><%= classteacher.email %></td>
+					<td><%= classteacher.Mobile_No %></td>
+					<td><%= classteacher.qualification %></td>
+					<td><%= classteacher.gender %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
 	</div>
 </div>
 <br><br><br>
@@ -39,7 +61,7 @@
 </h3>
 
 <h3>
-	<strong>Limit of students:5</strong>
+	<strong>Limit of students: <%= @totalstudent %></strong>
 </h3>
 
 <h3>
@@ -49,9 +71,9 @@
 
 <h3>
 	<strong>remaining students:</strong>
-	<%= 5-@classroom.students.count %>
+	<%= @totalstudent-@classroom.students.count %>
 </h3>
 
 <%= link_to 'Edit', edit_school_classroom_path(@school, @classroom) %> ||
-<%= link_to 'Back', school_classrooms_path(@school) %></%>
+<%= link_to 'Back', school_classrooms_path(@school) %></%> ||
 <%= link_to "Download as CSV", school_classroom_path(@school, @classroom,:format => "csv") %>

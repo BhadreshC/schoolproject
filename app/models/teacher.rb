@@ -1,7 +1,5 @@
 class Teacher < ApplicationRecord
-
 	require 'csv'
-	#has_many :student
 	belongs_to :classroom, optional: true
 	has_and_belongs_to_many :students, dependent: :destroy
 
