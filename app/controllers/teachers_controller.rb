@@ -6,6 +6,7 @@ class TeachersController < ApplicationController
 
 	def index
 		@teachers = Teacher.joins(:classroom).where("classrooms.school_id = ? " , @school)
+		@schoolclass = @school.classrooms
 		respond_to do |format|
 			format.html
 			format.csv { send_data @teachers.to_csv, filename: "teachers-#{Date.today}.csv" }
@@ -19,9 +20,12 @@ class TeachersController < ApplicationController
 		@schoolclassrooms = @school.classrooms.all
 	end
 
-	def edit; end
+	def edit
+		@schoolclassrooms = @school.classrooms.all
+	end
 
 	def create
+		@schoolclassrooms = @school.classrooms.all
 		@teacher = Teacher.new(teacher_params)
 		respond_to do |format|
 			if @teacher.save
@@ -35,6 +39,7 @@ class TeachersController < ApplicationController
 	end
 
 	def update
+		@schoolclassrooms = @school.classrooms.all
 		respond_to do |format|
 		if @teacher.update(teacher_params)
 			format.html { redirect_to school_teacher_path(@school, @teacher), notice: 'Teacher was successfully updated.' }

@@ -1,4 +1,15 @@
-<h1 align="center"> WELCOME TO <%= %> DASHBOARD OF CLASSROOM</h1>
+<h1 align="center"> WELCOME TO <%= %> DASHBOARD OF CLASSROOM</h1><br><br>
+<h3>
+	<strong>C name:</strong>
+	<%= @classroom.C_Name %> ||
+	<strong>standard:</strong>
+	<%= @classroom.wichstandard %> ||
+	<strong>Limit of students: <%= @totalstudent %></strong> ||
+	<strong>available students:</strong>
+	<%= @classroom.students.count%>||
+	<strong>remaining students:</strong>
+	<%= @totalstudent-@classroom.students.count %>
+</h3>
 <div class="row" >
 	<div class="column" style="background-color:#aaa;">
 	<table>
@@ -15,7 +26,7 @@
 				<tr>
 					<td><%= classstudent.name %></td>
 					<td><%= classstudent.email %></td>
-					<td><%= classstudent.standard %></td>
+					<td><%= @classroom.wichstandard %></td>
 				</tr>
 			<% end %>
 		</tbody>
@@ -49,30 +60,6 @@
 	</div>
 </div>
 <br><br><br>
-
-<h3>
-	<strong>C name:</strong>
-	<%= @classroom.C_Name %>
-</h3>
-
-<h3>
-	<strong>Wichstandard:</strong>
-	<%= @classroom.wichstandard %>
-</h3>
-
-<h3>
-	<strong>Limit of students: <%= @totalstudent %></strong>
-</h3>
-
-<h3>
-	<strong>available students:</strong>
-	<%= @classroom.students.count%>
-</h3>
-
-<h3>
-	<strong>remaining students:</strong>
-	<%= @totalstudent-@classroom.students.count %>
-</h3>
 
 <%= link_to 'Edit', edit_school_classroom_path(@school, @classroom) %> ||
 <%= link_to 'Back', school_classrooms_path(@school) %></%> ||

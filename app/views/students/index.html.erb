@@ -15,7 +15,7 @@
 			<tr>
 				<td><%= student.name %></td>
 				<td><%= student.email %></td>
-				<td><%= student.standard %></td>
+				<td><%= student.classroom.wichstandard %></td>
 				<td><%= student.classroom.C_Name%></td>
 				<td><%= link_to 'Show',school_student_path(@school, student)%></td>
 				<td><%= link_to 'Edit', edit_school_student_path(@school ,student) %></td>
@@ -25,7 +25,13 @@
 	</tbody>
 </table>
 <br>
-<h2 align="center">
-	<%= link_to 'New student', new_school_student_path(@school.id) %> |||
-	<%= link_to "Back", school_path(@school) %>
-</h2>
+<% if @schoolclass.count == 0%>
+	<h1 align="center">please first create classoom <br><br>
+		<%= link_to "Back", school_path(@school) %>
+	</h1>
+<% else %>
+	<h2 align="center">
+		<%= link_to 'New student', new_school_student_path(@school.id) %> |||
+		<%= link_to "Back", school_path(@school) %>
+	</h2>
+<% end %>

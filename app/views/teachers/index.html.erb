@@ -4,7 +4,8 @@
 		<tr>
 			<th>Name</th>
 			<th>Email</th>
-			<th>No. of Student</th>
+			<th>No. of Student</th>&nbsp;
+			<th>Classroom</th>
 			<th>Qualification</th>
 			<th>Mobile No.</th>
 			<th>gender</th>
@@ -16,7 +17,8 @@
 			<tr>
 				<td><%= teacher.name %></td>
 				<td><%= teacher.email %></td>
-				<td><%= %></td>
+				<td><%= teacher.students.count%></td>
+				<td><%= teacher.classroom.C_Name%></td>
 				<td><%= teacher.qualification %></td>
 				<td><%= teacher.Mobile_No %></td>
 				<td><%= teacher.gender %></td>
@@ -27,8 +29,13 @@
 		<% end %>
 	</tbody>
 </table>
-<h2 align="center"> 
-	<%= link_to "New Teacher", new_school_teacher_path(@school.id) %> ||
-	<%= link_to "Back", school_path(@school) %>
-</h2>
-<br>
+<% if @schoolclass.count == 0%>
+	<h1 align="center">please first create classoom <br><br>
+		<%= link_to "Back", school_path(@school) %>
+	</h1>
+<% else %>
+	<h2 align="center">
+		<%= link_to "New Teacher", new_school_teacher_path(@school.id) %> ||
+		<%= link_to "Back", school_path(@school) %>
+	</h2>
+<% end %>

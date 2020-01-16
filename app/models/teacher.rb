@@ -12,9 +12,7 @@ class Teacher < ApplicationRecord
 			end
 		end
 	end
-
-	validates :Mobile_No, presence:true, length: {minimum: 10, maximum: 10}
-	validates :name, presence:true
+	validates :Mobile_No, presence:true, length: {minimum: 10, maximum: 10, too_short:'should be 10 digits ', too_long: 'should be 10 digits '}
 	validates :qualification, presence:true
-	validates :email, presence: true, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
+	validates :email, presence: true, uniqueness: {scope: :classroom_id }, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 end

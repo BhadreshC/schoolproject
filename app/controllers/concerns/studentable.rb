@@ -8,6 +8,7 @@ module Studentable
 
 	def index
 		@students = Student.joins(:classroom).where("classrooms.school_id = ? " , @school)
+		@schoolclass = @school.classrooms
 	end
 
 	def show
@@ -19,9 +20,12 @@ module Studentable
 		@schoolclassrooms = @school.classrooms.all
 	end
 
-	def edit; end
+	def edit
+		@schoolclassrooms = @school.classrooms.all
+	end
 
 	def create
+		@schoolclassrooms = @school.classrooms.all
 		@student = Student.new(student_params)
 		@schoolclassrooms = @school.classrooms.all
 		respond_to do |format|
@@ -36,6 +40,7 @@ module Studentable
 	end
 
 	def update
+		@schoolclassrooms = @school.classrooms.all
 		respond_to do |format|
 			if @student.update(student_params)
 				format.html { redirect_to @student, notice: 'Student was successfully updated.' }
@@ -65,6 +70,6 @@ module Studentable
 		end
 
 		def student_params
-			params.require(:student).permit(:name, :email, :standard, :classroom_id)
+			params.require(:student).permit(:name, :email, :classroom_id)
 		end
 end

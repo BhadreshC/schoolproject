@@ -12,22 +12,22 @@
 
 	<div class="field">
 		<%= form.label :name %>
-		<%= form.text_field :name, required: true, :placeholder => "Your name"%>
+		<%= form.text_field :name, required: true, placeholder: "Your name"%>
 	</div>
 
 	<div class="field">
 		<%= form.label :email %>
-		<%= form.text_field :email, required: true, :placeholder => "Enter Email" %>
+		<%= form.text_field :email, required: true, placeholder: "Enter Email" %>
 	</div>
 
 	<div class="field">
 		<%= form.label :Mobile_No %>
-		<%= form.text_field :Mobile_No, required: true, :placeholder => "Your phone number"%>
+		<%= form.telephone_field :Mobile_No, required: true, placeholder: 'xxx-xxx-xxxx', pattern: '\d{10}'%>
 	</div>
 
 	<div class="field">	
 		<%= form.label :qualification %>
-		<%= form.text_field :qualification, required: true, :placeholder => "Enter Your qualification"%>
+		<%= form.text_field :qualification, required: true, placeholder: "Enter Your qualification"%>
 	</div>
 
 	<div class="field">
@@ -40,7 +40,7 @@
 		<%= form.label :gender, "Male"%>
 		<%= form.radio_button :gender, :Male%>
 		<%= form.label :gender, "Female" %>
-		<%= form.radio_button :gender, :Female, checked: true %>
+		<%= form.radio_button :gender, :Female%>
 	</div>
 
 	<div class="actions">

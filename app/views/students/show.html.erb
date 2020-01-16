@@ -10,13 +10,14 @@
 
 <p>
 	<strong>Standard:</strong>
-	<%= @student.standard %>
+	<%= @student.classroom.wichstandard %>
 </p>
 
 <p>
-	<strong>student classroom:</strong>
-	<%= @studentclassroom.C_Name %>
+	<strong>classroom:</strong>
+	<%= link_to "#{@studentclassroom.C_Name}", school_classroom_path(@school, @student.classroom) %> 
 </p>
-
-<%= link_to 'Edit', edit_school_student_path(@school, @student) %> |
-<%= link_to 'Back', school_students_path(@school) %>
+<h3>
+	<%= link_to 'Edit', edit_school_student_path(@school, @student) %> ||
+	<%= link_to 'Back', school_students_path(@school) %>
+</h3>
