@@ -1,6 +1,6 @@
 class Teacher < ApplicationRecord
 	require 'csv'
-	belongs_to :classroom, optional: true
+	belongs_to :classroom, optional: true, dependent: :destroy
 	has_and_belongs_to_many :students, dependent: :destroy
 
 	def self.to_csv

@@ -1,5 +1,5 @@
 class Student < ApplicationRecord
-	has_and_belongs_to_many :teachers,dependent: :destroy
+	has_and_belongs_to_many :teachers, dependent: :destroy
 	belongs_to :classroom, optional: true
 	validates :name, presence: true
 	validates :email, uniqueness: {scope: :classroom_id }, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }

@@ -2,18 +2,17 @@ class SchoolController < ApplicationController
 	include Checksession
 	before_action :check_session
 	before_action :set_school, only: [:show, :edit, :update, :destroy]
-
+	before_action :check_for_direct_access, only:[:show]
 	def index
-		@school = current_principle.school
 	end
 
 	def edit;end
 
 	def show
-		@no_of_student=Student.joins(:classroom).where("classrooms.school_id = ? " , params[:id])
-		@no_of_teacher=Teacher.joins(:classroom).where("classrooms.school_id = ? " , params[:id])
-		@classroomscount= @school.classrooms
-		@schoolprinciple= @school.principles.order("created_at").all
+			@no_of_student=Student.joins(:classroom).where("classrooms.school_id = ? " , params[:id])
+			@no_of_teacher=Teacher.joins(:classroom).where("classrooms.school_id = ? " , params[:id])
+			@classroomscount= @school.classrooms
+			@schoolprinciple= @school.principles.order("created_at").all
 	end
 
 	def new

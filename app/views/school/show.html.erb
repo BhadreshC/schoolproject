@@ -1,5 +1,5 @@
 <br><br>
-<h1 align="center"> WELCOME TO <%= %> DASHBOARD OF SCHOOL</h1>
+<marquee  scrollamount="15"><h1>WELCOME TO <%= %> SCHOOL DASHBOARD </h1></marquee>
 <div class="row">
 	<div class="column" style="background-color:#aaa;">
 		<h4 align="center">
@@ -52,5 +52,8 @@
 				</tr>
 			<% end %>
 		</tbody>
-	</table>
+	</table><br>
+	<h3>
+		<%= link_to "Create New principle", new_school_principle_path(@school) %> 
+	</h3>
 </div>

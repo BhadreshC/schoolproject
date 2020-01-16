@@ -1,5 +1,6 @@
 class PrinciplesController < ApplicationController
 	before_action :set_principle, only: [:show, :edit, :update, :destroy]
+	before_action :set_school
 	def index
 		@principles = Principle.all
 	end
@@ -7,20 +8,20 @@ class PrinciplesController < ApplicationController
 	def show; end
 
 	def new
-		@principle = Principle.new
+		@principle= @school.principles.new
 	end
 
 	def edit; end
 
 	def create
-		@principle = Principle.new(principle_params)
+		@principle = @school.principles.new(principle_params)
 		@school = @principle.school
 		@schoolprinciples = @school.principles
 		@schoolprinciples.update_all status: false
 		respond_to do |format|
 			if @principle.save
 				session[:principle_id] = @principle.id
-				format.html { redirect_to school_index_url, notice: "#{@principle.username } PRINCIPLE CREATED." }
+				format.html { redirect_to school_path(@school), notice: "#{@principle.username } PRINCIPLE CREATED." }
 				format.json { render :show, status: :created, location: @principle }
 			else
 				format.html { render :new }
@@ -69,6 +70,6 @@ class PrinciplesController < ApplicationController
 		end
 
 		def principle_params
-			params.require(:principle).permit(:username, :email, :password, :password_confirmation,:school_id)
+			params.require(:principle).permit(:username, :email, :password, :password_confirmation )
 		end
 end

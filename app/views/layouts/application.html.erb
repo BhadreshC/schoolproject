@@ -14,8 +14,8 @@
 					Logged in as <%= current_principle.username %>
 					<%= link_to "Log Out", logout_path,  data: {confirm: 'Are you sure?'} %>
 				<% else %>
-					<%= link_to "Sign Up", signup_path %> or
-					<%= link_to "Log In", login_path %>
+					<%#= link_to "Sign Up", signup_path %>
+					<%#= link_to "Log In", login_path %>
 				<% end %>
 			</font>
 		</div>

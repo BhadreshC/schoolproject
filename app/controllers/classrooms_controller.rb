@@ -10,12 +10,13 @@ class ClassroomsController < ApplicationController
 
 	def show
 		@classrooms= @school.classrooms
+		@classroom = @classrooms.find_by_id(params[:id])
 		@totalstudent= 5
 		@classstudents=@classrooms.find_by_id(params[:id]).students
 		@classteachers=@classrooms.find_by_id(params[:id]).teachers
 		respond_to do |format|
 			format.html
-			format.csv { send_data @classrooms.to_csv, filename: "classrooms-#{Date.today}.csv" }
+			format.csv { send_data @classroom.to_csv, filename: "classrooms-#{Date.today}.csv" }
 		end
 	end
 
