@@ -12,14 +12,16 @@ module Checksession
 		end
 	end
 	def check_for_direct_access
-			@schoolid= params[:id]
-			@school=School.find_by(id: @schoolid)
-			puts "_----------------------------------"
-			@sp= @school.principles
-			puts @sp.as_json
-			if @sp.exists?(session[:principle_id])
-			else
-				redirect_to  root_url, notice: 'login is required.'
+			@school=School.find_by(id: params[:id])
+			begin
+				@sp= @school.principles.where(status: true)
+				puts @sp.as_json
+				if @sp.exists?(session[:principle_id])
+				else
+					return render_not_found
+				end
+			rescue Exception => e
+				puts "----------------#{e}----------------------"
 			end
 	end
 end

@@ -62,11 +62,11 @@ module Studentable
 
 	private
 		def set_school
-			@school = School.find_by(id: params[:school_id])
+			@school = School.find_by(id: params[:school_id]) or not_found
 		end
 
 		def set_student
-			@student = Student.find_by(id: params[:id])
+			@student = Student.find_by(id: params[:id]) or not_found
 		end
 
 		def student_params

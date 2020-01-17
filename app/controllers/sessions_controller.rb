@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
 	before_action :check_session_for_new_loign, only: [:new]
-
 	def new; end
 	def create
 		if Principle.exists?(username: params[:username])

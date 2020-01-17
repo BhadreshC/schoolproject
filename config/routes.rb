@@ -11,4 +11,5 @@ Rails.application.routes.draw do
 		resources :teachers
 		resources :principles
 	end
+	match '*a', :to => 'errors#routing', via: :get
 end

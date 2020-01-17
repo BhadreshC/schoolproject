@@ -2,17 +2,22 @@ class SchoolController < ApplicationController
 	include Checksession
 	before_action :check_session
 	before_action :set_school, only: [:show, :edit, :update, :destroy]
-	before_action :check_for_direct_access, only:[:show]
+	before_action :check_for_direct_access
 	def index
+		redirect_to 
 	end
 
 	def edit;end
 
 	def show
+		#if School.exists?(params[:id])
 			@no_of_student=Student.joins(:classroom).where("classrooms.school_id = ? " , params[:id])
 			@no_of_teacher=Teacher.joins(:classroom).where("classrooms.school_id = ? " , params[:id])
 			@classroomscount= @school.classrooms
 			@schoolprinciple= @school.principles.order("created_at").all
+		# else
+		# 	return render_not_found
+		# end
 	end
 
 	def new
@@ -54,7 +59,7 @@ class SchoolController < ApplicationController
 
 	private
 		def set_school
-			@school = School.find_by(id: params[:id])
+			@school = School.find_by(id: params[:id]) or not_found
 		end
 
 		def school_params

@@ -65,7 +65,7 @@ class TeachersController < ApplicationController
 		end
 
 		def set_teacher
-			@teacher = Teacher.find_by(id: params[:id])
+			@teacher = Teacher.find_by(id: params[:id]) or not_found
 		end
 
 		def teacher_params
