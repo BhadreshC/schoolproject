@@ -1,4 +1,4 @@
 class StudentsController < ApplicationController
-	include Checksession
+	#include Checksession
 	include Studentable
 end

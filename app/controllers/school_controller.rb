@@ -1,10 +1,10 @@
 class SchoolController < ApplicationController
-	include Checksession
-	before_action :check_session
+	# include Checksession
+	# before_action :check_session
 	before_action :set_school, only: [:show, :edit, :update, :destroy]
-	before_action :check_for_direct_access
+	# before_action :check_for_direct_access
 	def index
-		redirect_to 
+		puts"------------------------THIS IS index ___________________________------------"
 	end
 
 	def edit;end

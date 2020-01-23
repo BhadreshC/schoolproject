@@ -1,0 +1,8 @@
+<%#if principle_signed_in? %>
+  <!-- Logged in as <strong><%#= current_principle.email %></strong>. -->
+  <%#= link_to 'Edit profile', edit_principle_registration_path %> 
+  <%#= link_to "Logout", destroy_principle_session_path, method: :delete %>
+<%# else %>
+  <%#= link_to "Sign up", new_principle_registration_path %> 
+  <%#= link_to "Login", new_principle_session_path %>
+<%# end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_15_111715) do
+ActiveRecord::Schema.define(version: 2020_01_23_102334) do
 
   create_table "classrooms", force: :cascade do |t|
     t.string "C_Name"
@@ -22,13 +22,22 @@ ActiveRecord::Schema.define(version: 2020_01_15_111715) do
   end
 
   create_table "principles", force: :cascade do |t|
-    t.string "username"
-    t.string "email"
-    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "school_id"
     t.boolean "status", default: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "username"
+    t.string "email"
+    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at"
+    t.string "reset_password_token"
+    t.integer "failed_attempts"
+    t.string "unlock_token"
+    t.string "unconfirmed_email"
+    t.datetime "confirmation_sent_at"
+    t.datetime "confirmed_at"
+    t.string "confirmation_token"
     t.index ["school_id"], name: "index_principles_on_school_id"
   end
 
@@ -41,7 +50,6 @@ ActiveRecord::Schema.define(version: 2020_01_15_111715) do
   create_table "students", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.integer "standard"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "classroom_id"

@@ -1,0 +1,91 @@
+Searching 18259 files for "new principle"
+
+/home/admin2/Desktop/project/schoolproject/app/views/principles/index.html.erb:
+   24  <br>
+   25  <h3>
+   26: 	<%= link_to 'New Principle', new_principle_path %> ||
+   27  	<%= link_to 'Back to Home', root_path %>
+   28  </h3>
+
+/home/admin2/Desktop/project/schoolproject/app/views/principles/new.html.erb:
+    1: <h1>New Principle</h1>
+    2  
+    3  <%= render 'form', principle: @principle %>
+
+/home/admin2/Desktop/project/schoolproject/app/views/school/show.html.erb:
+   55  	</table><br>
+   56  	<h3>
+   57: 		<%= link_to "Create New principle", new_school_principle_path(@school) %> 
+   58  	</h3>
+   59  </div>
+
+/home/admin2/Desktop/project/schoolproject/log/development.log:
+    <binary>
+
+/home/admin2/Desktop/project/schoolproject/test/system/principles_test.rb:
+   13    test "creating a Principle" do
+   14      visit principles_url
+   15:     click_on "New Principle"
+   16  
+   17      fill_in "Email", with: @principle.email
+
+5 matches across 5 files
+
+
+Searching 18259 files for "password_digest"
+
+/home/admin2/Desktop/project/schoolproject/db/migrate/20200106132140_create_principles.rb:
+    4  			t.string :username
+    5  			t.string :email
+    6: 			t.string :password_digest
+    7  			t.timestamps
+    8  		end
+
+/home/admin2/Desktop/project/schoolproject/db/migrate/20200122083239_remove_column_to_principles.rb:
+   11  		remove_column :principles, :remember_created_at, :datetime
+   12  
+   13: 		remove_column :principles, :password_digest, :string
+   14  
+   15  		#remove_index "principles", name: "reset_password_token"
+
+/home/admin2/Desktop/project/schoolproject/log/development.log:
+    <binary>
+
+/home/admin2/Desktop/project/schoolproject/test/fixtures/principles.yml:
+    4    username: MyString
+    5    email: MyString
+    6:   password_digest: <%= BCrypt::Password.create('secret') %>
+    7  
+    8  two:
+    9    username: MyString
+   10    email: MyString
+   11:   password_digest: <%= BCrypt::Password.create('secret') %>
+   12  
+
+/home/admin2/Desktop/project/schoolproject/tmp/cache/bootsnap-compile-cache/3a/940f664e39c973:
+    <binary>
+
+/home/admin2/Desktop/project/schoolproject/tmp/cache/bootsnap-compile-cache/43/79e992143bcf33:
+    <binary>
+
+/home/admin2/Desktop/project/schoolproject/tmp/cache/bootsnap-compile-cache/47/4e2ca097ef13f3:
+    <binary>
+
+/home/admin2/Desktop/project/schoolproject/tmp/cache/bootsnap-compile-cache/79/52e8fde79a8810:
+    <binary>
+
+/home/admin2/Desktop/project/schoolproject/tmp/cache/bootsnap-compile-cache/af/db80374a2a5838:
+    <binary>
+
+/home/admin2/Desktop/project/schoolproject/tmp/cache/bootsnap-compile-cache/b0/9aa854bf830333:
+    <binary>
+
+/home/admin2/Desktop/project/schoolproject/tmp/cache/bootsnap-compile-cache/dc/3dc65accab8037:
+    <binary>
+
+672 matches across 11 files
+
+
+`password_digest=Searching 18259 files for "`password_digest="
+
+0 matches
