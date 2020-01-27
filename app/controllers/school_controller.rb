@@ -1,25 +1,27 @@
 class SchoolController < ApplicationController
 	include Checksession
-	before_action :check_session
 	before_action :set_school, only: [:show, :edit, :update, :destroy]
+	before_action :check_session
 	before_action :check_permission, only: [:show]
+
 	def index
+		redirect_to root_url
 	end
 
 	def edit;end
 
 	def show
+			@schoolprinciple= @school.principles.order("created_at").all
 			@no_of_student=Student.joins(:classroom).where("classrooms.school_id = ? " , params[:id])
 			@no_of_teacher=Teacher.joins(:classroom).where("classrooms.school_id = ? " , params[:id])
 			@classroomscount= @school.classrooms
-			@schoolprinciple= @school.principles.order("created_at").all
 	end
 
 	def new
 		@schoolclassrooms = @school.classrooms
 	end
 
-	def created_at
+	def create
 		@school = School.new(school_params)
 		respond_to do |format|
 			if @school.save
