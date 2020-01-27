@@ -60,11 +60,11 @@ class ClassroomsController < ApplicationController
 
 	private
 		def set_school
-			@school = School.find_by(id: params[:school_id])
+			@school = School.find_by(id: params[:school_id]) or not_found
 		end
 
 		def set_classroom
-			@classroom = @school.classrooms.find_by(id: params[:id])
+			@classroom = @school.classrooms.find_by(id: params[:id]) or not_found
 		end
 
 		def classroom_params

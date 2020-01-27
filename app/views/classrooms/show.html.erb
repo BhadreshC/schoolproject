@@ -1,4 +1,4 @@
-<h1 align="center"> WELCOME TO <%= %> DASHBOARD OF CLASSROOM</h1><br><br>
+<h1 align="center"> WELCOME TO <%= %> DASHBOARD OF CLASSROOM</h1><br /><br />
 <h3>
 	<strong>C name:</strong>
 	<%= @classroom.C_Name %> ||
@@ -12,54 +12,52 @@
 </h3>
 <div class="row" >
 	<div class="column" style="background-color:#aaa;">
-	<table>
-		<h2 align="center">Class Students</h2>
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Email</th>
-				<th>standard</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% @classstudents.each do |classstudent| %>
+		<table>
+			<h2 align="center">Class Students</h2>
+			<thead>
 				<tr>
-					<td><%= classstudent.name %></td>
-					<td><%= classstudent.email %></td>
-					<td><%= @classroom.wichstandard %></td>
+					<th>Name</th>
+					<th>Email</th>
+					<th>standard</th>
 				</tr>
-			<% end %>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<% @classstudents.each do |classstudent| %>
+					<tr>
+						<td><%= classstudent.name %></td>
+						<td><%= classstudent.email %></td>
+						<td><%= @classroom.wichstandard %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
 	</div>
-
 	<div class="column" style="background-color:#ccc;">
 		<table>
-		<h2 align="center">Class Teachers</h2>
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Email</th>
-				<th>Mobile_No</th>
-				<th>qualification</th>
-				<th>gender</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% @classteachers.each do |classteacher| %>
+			<h2 align="center">Class Teachers</h2>
+			<thead>
 				<tr>
-					<td><%= classteacher.name %></td>
-					<td><%= classteacher.email %></td>
-					<td><%= classteacher.Mobile_No %></td>
-					<td><%= classteacher.qualification %></td>
-					<td><%= classteacher.gender %></td>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Mobile_No</th>
+					<th>qualification</th>
+					<th>gender</th>
 				</tr>
-			<% end %>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<% @classteachers.each do |classteacher| %>
+					<tr>
+						<td><%= classteacher.name %></td>
+						<td><%= classteacher.email %></td>
+						<td><%= classteacher.Mobile_No %></td>
+						<td><%= classteacher.qualification %></td>
+						<td><%= classteacher.gender %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
 	</div>
-</div>
-<br><br><br>
+</div><br /><br /><br />
 
 <%= link_to 'Edit', edit_school_classroom_path(@school, @classroom) %> ||
 <%= link_to 'Back', school_classrooms_path(@school) %></%> ||

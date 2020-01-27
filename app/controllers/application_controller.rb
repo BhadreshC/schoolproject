@@ -1,10 +1,6 @@
 class ApplicationController < ActionController::Base
 	rescue_from ActionController::RoutingError, :with => :render_404
-
-	#-----------------try-------------------------------
 	rescue_from ActiveRecord::RecordNotFound, with: :render_404
-	#-----------------try-------------------------------
-
 	protect_from_forgery with: :exception
 	before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -29,7 +25,7 @@ class ApplicationController < ActionController::Base
 			if exception
 				logger.info "Rendering 404: #{exception.message}"
 			end
-		render :file => "#{Rails.root}/public/404.html", :status => 404, :layout => false
+			render :file => "#{Rails.root}/public/404.html", :status => 404, :layout => false
 		end
 
 		def not_found

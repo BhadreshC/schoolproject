@@ -8,8 +8,8 @@ class Principle < ApplicationRecord
 		self.status = false
 	end
 
-	def active_for_authentication? 
-		super && status? 
+	def active_for_authentication?
+		super && status?
 	end
 
 	def after_confirmation

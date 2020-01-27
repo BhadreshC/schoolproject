@@ -41,12 +41,12 @@ class TeachersController < ApplicationController
 	def update
 		@schoolclassrooms = @school.classrooms.all
 		respond_to do |format|
-		if @teacher.update(teacher_params)
-			format.html { redirect_to school_teacher_path(@school, @teacher), notice: 'Teacher was successfully updated.' }
-			format.json { render :show, status: :ok, location: @teacher }
-		else
-			format.html { render :edit }
-			format.json { render json: @teacher.errors, status: :unprocessable_entity }
+			if @teacher.update(teacher_params)
+				format.html { redirect_to school_teacher_path(@school, @teacher), notice: 'Teacher was successfully updated.' }
+				format.json { render :show, status: :ok, location: @teacher }
+			else
+				format.html { render :edit }
+				format.json { render json: @teacher.errors, status: :unprocessable_entity }
 			end
 		end
 	end
@@ -61,7 +61,7 @@ class TeachersController < ApplicationController
 
 	private
 		def set_school
-			@school = School.find_by(id: params[:school_id])
+			@school = School.find_by(id: params[:school_id]) or not_found
 		end
 
 		def set_teacher

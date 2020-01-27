@@ -30,12 +30,12 @@
 	</tbody>
 </table>
 <% if @schoolclass.count == 0%>
-	<h1 align="center">please first create classoom <br><br>
+	<h1 align="center">please first create classoom <br /><br />
 		<%= link_to "Back", school_path(@school) %>
 	</h1>
 <% else %>
 	<h2 align="center">
-		<%= link_to "New Teacher", new_school_teacher_path(@school.id) %> ||
+		<%= link_to "New Teacher", new_school_teacher_path(@school.id) %> |||
 		<%= link_to "Back", school_path(@school) %>
 	</h2>
 <% end %>
