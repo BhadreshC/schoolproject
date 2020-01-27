@@ -1,17 +1,12 @@
 Rails.application.routes.draw do
-  get 'pages/home'
-  devise_for :principles
-	#resources :sessions, only: [:new, :create, :destroy]
-	#post "/deactivate", to: "principles#deactivate"
-	# get 'signup', to: 'principles#new', as: 'signup'
-	# get 'login', to: 'sessions#new', as: 'login'
-	# get 'logout', to: 'sessions#destroy', as: 'logout'
-	root 'pages#home'
+	devise_for :principles
+	match '*a', :to => 'errors#routing', via: :get
+	root :to => redirect("/principles/sign_in")
 	resources :school do
+		post '/principles', to: 'principles#create'
+		get '/principles/new', to: 'principles#new', as: 'new_principle'
 		resources :classrooms
 		resources :students
 		resources :teachers
-		#resources :principles
-	end
-	match '*a', :to => 'errors#routing', via: :get
+		end
 end

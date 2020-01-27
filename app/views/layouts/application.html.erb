@@ -11,10 +11,10 @@
 		<div id="principle_header" align="right">
 			<font size="5">
 				<% if current_principle %>
+					<%= puts current_principle.active_for_authentication?%>
 						Logged in as <%= current_principle.username %>
 					<%= link_to "Sign out", destroy_principle_session_path, data: {confirm: 'Are you sure?'}, method: :delete %>
 				<% else %>
-					<%= link_to "Sign up", new_principle_registration_path %>|||
 					<%= link_to "Login", new_principle_session_path %>
 				<% end %>
 			</font>
@@ -26,7 +26,6 @@
 				<% end %>
 			<% end %>
 		</font>
-
 		<%= yield %>
 	</body>
 </html>

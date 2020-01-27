@@ -1,6 +1,6 @@
 class ClassroomsController < ApplicationController
-	#include Checksession
-	#before_action :check_session
+	include Checksession
+	before_action :check_session
 	before_action :set_school
 	before_action :set_classroom, only: [:show, :edit, :update, :destroy]
 
@@ -11,7 +11,7 @@ class ClassroomsController < ApplicationController
 	def show
 		@classrooms= @school.classrooms
 		@classroom = @classrooms.find_by_id(params[:id])
-		@totalstudent= 5
+		@totalstudent = 5
 		@classstudents=@classrooms.find_by_id(params[:id]).students
 		@classteachers=@classrooms.find_by_id(params[:id]).teachers
 		respond_to do |format|

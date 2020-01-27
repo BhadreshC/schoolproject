@@ -7,7 +7,6 @@
 			<h2 align="center"><%= @no_of_teacher.count%> </h2><br>
 			<h3 align="center"><%= link_to "Teacher List", school_teachers_path(@school) %> </h3>
 		</h4>
-		
 	</div>
 
 	<div class="column" style="background-color:#bbb;">
@@ -44,7 +43,7 @@
 					<td><%= principle.username %></td>
 					<td><%= principle.email %></td>
 					<td><%= principle.created_at %></td>
-					<% if current_principle.username == principle.username %>
+					<% if principle.status? %>
 						<td> Active</td>
 					<% else %>
 						<td> Deactive</td>
@@ -54,6 +53,6 @@
 		</tbody>
 	</table><br>
 	<h3>
-		<%= link_to "Create New principle", new_principle_registration_path(@school) %> 
+		<%= link_to "Create New principle", school_new_principle_path(@school) %> 
 	</h3>
 </div>

@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
 	rescue_from ActionController::RoutingError, :with => :render_404
 	protect_from_forgery with: :exception
-
 	before_action :configure_permitted_parameters, if: :devise_controller?
 
 	protected
@@ -11,11 +10,13 @@ class ApplicationController < ActionController::Base
 		end
 
 		def after_sign_in_path_for(resource)
-			puts "--------------"
-			puts @school= current_principle.school
-			puts "--------------"
-			puts "--------------"
-			stored_location_for(resource) || school_path(@school)
+			if resource.status == true
+				@school= current_principle.school
+				stored_location_for(resource) || school_path(@school)
+			else
+				@school= current_principle.school
+				stored_location_for(resource) || school_path(@school)
+			end
 		end
 
 	private

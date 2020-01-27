@@ -1,23 +1,18 @@
 class SchoolController < ApplicationController
-	# include Checksession
-	# before_action :check_session
+	include Checksession
+	before_action :check_session
 	before_action :set_school, only: [:show, :edit, :update, :destroy]
-	# before_action :check_for_direct_access
+	before_action :check_permission, only: [:show]
 	def index
-		puts"------------------------THIS IS index ___________________________------------"
 	end
 
 	def edit;end
 
 	def show
-		#if School.exists?(params[:id])
 			@no_of_student=Student.joins(:classroom).where("classrooms.school_id = ? " , params[:id])
 			@no_of_teacher=Teacher.joins(:classroom).where("classrooms.school_id = ? " , params[:id])
 			@classroomscount= @school.classrooms
 			@schoolprinciple= @school.principles.order("created_at").all
-		# else
-		# 	return render_not_found
-		# end
 	end
 
 	def new
@@ -64,5 +59,12 @@ class SchoolController < ApplicationController
 
 		def school_params
 			params.require(:school).permit(:name, :principle)
+		end
+
+		def check_permission
+			@principles = @school.principles
+			if @principles.exists?(current_principle.id) or not_found
+			else
+			end
 		end
 end
