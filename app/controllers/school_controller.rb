@@ -14,10 +14,6 @@ class SchoolController < ApplicationController
 		@classroomscount= @school.classrooms
 	end
 
-	def new
-		@schoolclassrooms = @school.classrooms
-	end
-
 	def create
 		@school = School.new(school_params)
 		respond_to do |format|
@@ -31,14 +27,6 @@ class SchoolController < ApplicationController
 		end
 	end
 
-	def destroy
-		@school.destroy
-		respond_to do |format|
-			format.html { redirect_to schools_url, notice: 'school was successfully destroyed.' }
-			format.json { head :no_content }
-		end
-	end
-
 	private
 		def set_school
 			@school = School.find_by(id: params[:id]) or not_found
@@ -49,8 +37,10 @@ class SchoolController < ApplicationController
 		end
 
 		def check_permission
-			@principles = @school.principles
-			if @principles.exists?(current_principle.id) or not_found
+			if current_principle
+				@principles = @school.principles
+				if @principles.exists?(current_principle.id) or not_found
+				end
 			end
 		end
 end
