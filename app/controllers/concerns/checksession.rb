@@ -13,7 +13,6 @@ module Checksession
 				redirect_to :controller => "classroom", :action => "index"
 			return
 		end
-
 		if @principles.exists?(current_principle.id) or not_found
 		end
 	end

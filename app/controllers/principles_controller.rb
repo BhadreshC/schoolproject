@@ -35,7 +35,6 @@ class PrinciplesController < ApplicationController
 			params.require(:principle).permit(:username, :email, :password, :password_confirmation)
 		end
 		def check_permission_for_create
-			puts "--------------------------"
 			if current_principle
 			else
 				redirect_to root_url, notice: 'Login is required '

@@ -33,7 +33,7 @@ class SchoolController < ApplicationController
 		end
 
 		def school_params
-			params.require(:school).permit(:name, :principle)
+			params.require(:school).permit(:name, :principle) or not_found
 		end
 
 		def check_permission
