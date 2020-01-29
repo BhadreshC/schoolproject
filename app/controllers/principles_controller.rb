@@ -1,6 +1,6 @@
 class PrinciplesController < ApplicationController
 	include Checksession
-	before_action :check_session,:check_permission_for_create, only: [:new]
+	before_action :check_session,:check_permission_for_new, only: [:new]
 	before_action :set_principle, only: [:show, :edit, :update, :destroy]
 	before_action :set_school
 
@@ -34,7 +34,7 @@ class PrinciplesController < ApplicationController
 		def principle_params
 			params.require(:principle).permit(:username, :email, :password, :password_confirmation)
 		end
-		def check_permission_for_create
+		def check_permission_for_new
 			if current_principle
 			else
 				redirect_to root_url, notice: 'Login is required '

@@ -7,10 +7,6 @@ class TeachersController < ApplicationController
 	def index
 		@teachers = Teacher.joins(:classroom).where("classrooms.school_id = ? " , @school)
 		@schoolclass = @school.classrooms
-		respond_to do |format|
-			format.html
-			format.csv { send_data @teachers.to_csv, filename: "teachers-#{Date.today}.csv" }
-		end
 	end
 
 	def show; end
@@ -45,7 +41,7 @@ class TeachersController < ApplicationController
 				format.html { redirect_to school_teacher_path(@school, @teacher), notice: 'Teacher was successfully updated.' }
 				format.json { render :show, status: :ok, location: @teacher }
 			else
-				format.html { render :edit }	
+				format.html { render :edit }
 				format.json { render json: @teacher.errors, status: :unprocessable_entity }
 			end
 		end
