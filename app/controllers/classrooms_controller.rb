@@ -1,8 +1,9 @@
 class ClassroomsController < ApplicationController
 	include Checksession
 	before_action :set_school
-	before_action :set_classroom, only: [:show, :edit, :update, :destroy]
+	before_action :set_classroom, only: [:show, :edit, :update, :destroy,:updateclass]
 	before_action :check_session, :check_permission
+
 	def index
 		@classrooms = @school.classrooms
 	end
@@ -58,6 +59,27 @@ class ClassroomsController < ApplicationController
 		end
 	end
 
+	def upgradeclass
+		@classrooms= @school.classrooms
+		@classroom = @classrooms.find_by_id(params[:id])
+		@classstudents=@classrooms.find_by_id(params[:id]).students
+		@studname=@classstudents
+	end
+
+	def updateclass
+		@selectedstudents = @classroom.students.where(id: params[:student_ids])
+		@updatedstudentlist = @selectedstudents.update_all(classroom_id: params[:classroom_id][:id])
+		respond_to do |format|
+			if @updatedstudentlist
+				format.html { redirect_to school_classroom_path(@school, @classroom), notice: "#{@updatedstudentlist} students class successfully updated" }
+				format.json { render :show, status: :ok, location: @classroom }
+			else
+				format.html { redirect_to upgradeclass_school_classroom_path(@school, @classroom), notice: 'Something went wrong'}
+				format.json { render json: @classroom.errors, status: :unprocessable_entity }
+			end
+		end
+	end
+
 	private
 		def set_school
 			@school = School.find_by(id: params[:school_id]) or not_found
@@ -68,6 +90,6 @@ class ClassroomsController < ApplicationController
 		end
 
 		def classroom_params
-			params.require(:classroom).permit(:C_Name, :wichstandard, :school_id)
+			params.require(:classroom).permit(:C_Name, :standard, :school_id)
 		end
 end

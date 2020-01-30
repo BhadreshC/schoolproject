@@ -1,14 +1,15 @@
-<h1 align="center"> WELCOME TO <%= %> DASHBOARD OF CLASSROOM</h1><br /><br />
+<h1 align="center"> Welcome to <%= @classroom.C_Name%> Classroom</h1><br /><br />
 <h3>
 	<strong>C name:</strong>
 	<%= @classroom.C_Name %> ||
 	<strong>standard:</strong>
-	<%= @classroom.wichstandard %> ||
+	<%= @classroom.standard %> ||
 	<strong>Limit of students: <%= @totalstudent %></strong> ||
 	<strong>available students:</strong>
 	<%= @classroom.students.count%>||
 	<strong>remaining students:</strong>
-	<%= @totalstudent-@classroom.students.count %>
+	<%= @totalstudent-@classroom.students.count %> &emsp;
+	<%= link_to "<button type='button'>Upgrade class</button>".html_safe, upgradeclass_school_classroom_path(@school, @classroom) %>
 </h3>
 <div class="row" >
 	<div class="column" style="background-color:#aaa;">
@@ -26,7 +27,7 @@
 					<tr>
 						<td><%= classstudent.name %></td>
 						<td><%= classstudent.email %></td>
-						<td><%= @classroom.wichstandard %></td>
+						<td><%= @classroom.standard %></td>
 					</tr>
 				<% end %>
 			</tbody>
@@ -58,7 +59,6 @@
 		</table>
 	</div>
 </div><br /><br /><br />
-
 <%= link_to 'Edit', edit_school_classroom_path(@school, @classroom) %> ||
 <%= link_to 'Back', school_classrooms_path(@school) %></%> ||
 <%= link_to "Download as CSV", school_classroom_path(@school, @classroom,:format => "csv") %>

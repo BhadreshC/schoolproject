@@ -10,7 +10,7 @@
 
 <p>
 	<strong>Standard:</strong>
-	<%= @student.classroom.wichstandard %>
+	<%= @student.classroom.standard %>
 </p>
 
 <p>
@@ -22,3 +22,18 @@
 	<%= link_to 'Edit', edit_school_student_path(@school, @student) %> ||
 	<%= link_to 'Back', school_students_path(@school) %>
 </h3>
+	<table align="center">
+		<marquee scrollamount="15"><h2>Students activities</h2></marquee>
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>activity</th>
+			</tr>
+		</thead>
+		<tbody>
+					<tr>
+						<td><%= @student.created_at%></td>
+						<td>student come in school</td>
+					</tr>
+		</tbody>
+	</table>

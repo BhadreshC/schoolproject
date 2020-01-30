@@ -21,6 +21,9 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'devise'
 
+gem 'select_all-rails'
+
+
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do

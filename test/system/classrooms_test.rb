@@ -15,7 +15,7 @@ class ClassroomsTest < ApplicationSystemTestCase
     click_on "New Classroom"
 
     fill_in "C name", with: @classroom.C_Name
-    fill_in "Wichstandard", with: @classroom.wichstandard
+    fill_in "standard", with: @classroom.standard
     click_on "Create Classroom"
 
     assert_text "Classroom was successfully created"
@@ -27,7 +27,7 @@ class ClassroomsTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "C name", with: @classroom.C_Name
-    fill_in "Wichstandard", with: @classroom.wichstandard
+    fill_in "standard", with: @classroom.standard
     click_on "Update Classroom"
 
     assert_text "Classroom was successfully updated"

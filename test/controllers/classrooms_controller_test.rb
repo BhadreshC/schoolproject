@@ -17,7 +17,7 @@ class ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create classroom" do
     assert_difference('Classroom.count') do
-      post classrooms_url, params: { classroom: { C_Name: @classroom.C_Name, wichstandard: @classroom.wichstandard } }
+      post classrooms_url, params: { classroom: { C_Name: @classroom.C_Name, standard: @classroom.standard } }
     end
 
     assert_redirected_to classroom_url(Classroom.last)
@@ -34,7 +34,7 @@ class ClassroomsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update classroom" do
-    patch classroom_url(@classroom), params: { classroom: { C_Name: @classroom.C_Name, wichstandard: @classroom.wichstandard } }
+    patch classroom_url(@classroom), params: { classroom: { C_Name: @classroom.C_Name, standard: @classroom.standard } }
     assert_redirected_to classroom_url(@classroom)
   end
 

@@ -2,8 +2,8 @@
 
 one:
   C_Name: MyString
-  wichstandard: 1
+  standard: 1
 
 two:
   C_Name: MyString
-  wichstandard: 1
+  standard: 1

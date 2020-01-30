@@ -3,7 +3,7 @@
 	<thead>
 		<tr>
 			<th>C name</th>
-			<th>Wichstandard</th>
+			<th>standard</th>
 			<th colspan="3"></th>
 		</tr>
 	</thead>
@@ -11,7 +11,7 @@
 		<% @classrooms.each do |classroom| %>
 			<tr>
 				<td><%= classroom.C_Name %></td>
-				<td><%= classroom.wichstandard %></td>
+				<td><%= classroom.standard %></td>
 				<td><%= link_to 'Show', school_classroom_path(@school, classroom) %></td>
 				<td><%= link_to 'Edit', edit_school_classroom_path(@school, classroom) %></td>
 				<td><%= link_to 'Destroy', school_classroom_path(@school, classroom), method: :delete, data: { confirm: 'Are you sure?' } %></td>

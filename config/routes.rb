@@ -6,7 +6,13 @@ Rails.application.routes.draw do
 	resources :school do
 		post '/principles', to: 'principles#create'
 		get '/principles/new', to: 'principles#new', as: 'new_principle'
-		resources :classrooms
+		resources :classrooms do
+			member do
+				get :upgradeclass
+				post :upgradeclass
+				post :updateclass
+				end
+		end
 		resources :students
 		resources :teachers
 		end

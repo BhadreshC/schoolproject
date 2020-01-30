@@ -1,0 +1,36 @@
+<%= form_tag updateclass_school_classroom_path do %>
+	<table>
+		<marquee scrollamount="15"><h2>UPGRADE STUDENTS STANDARD</h2></marquee>
+		<thead>
+			<tr>
+				<th>IS PASS?</th>
+				<th>Name</th>
+				<th>
+					<div class="field">
+						<%= label_tag 'standard' %>
+						<%= collection_select :classroom_id, :id, @classrooms.where("standard > ?" , @classroom.standard), :id, :C_Name,{:prompt => "--select classroom--"}, required: true %>
+					</div>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% if @studname.empty? %>
+				<td><h4>Oppsss!!, No students are available</h4></td>
+			<% else %>
+				<% @studname.each do |student| %>
+					<tr>
+						<td><%= check_box_tag "student_ids[]", student.id, false %></td>
+						<td><%= student.name %></td>
+					</tr>
+				<% end %>
+			<% end %>
+		</tbody>
+	</table>
+	<% if !@studname.empty? %>
+		<div class="actions">
+			<%= submit_tag "update student classroom"%>
+			<%= button_tag "Reset", type: :reset %>
+		</div>
+	<% end %>
+	<%= link_to "<button type='button'>Cancle</button>".html_safe, school_classroom_path(@school, @classroom) %>
+<% end %>
