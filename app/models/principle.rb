@@ -13,8 +13,8 @@ class Principle < ApplicationRecord
 	end
 
 	def after_confirmation
-	school = self.school
-	school.principles.update_all(status: false)
-	self.update_attribute(:status, true)
-	end
+		school = self.school
+		school.principles.update_all(status: false)
+		self.update_attribute(:status, true)
+		end
 end

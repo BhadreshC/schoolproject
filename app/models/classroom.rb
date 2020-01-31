@@ -3,7 +3,7 @@ class Classroom < ApplicationRecord
 	has_many :students,dependent: :destroy
 	has_many :teachers, dependent: :destroy
 	belongs_to :school, dependent: :destroy
-	validates :C_Name, presence: true, uniqueness: true
+	validates :C_Name, presence: true, uniqueness: {scope: :school_id }
 	validates :standard, length: {minimum: 1, maximum: 12}, allow_blank: false, presence: true
 	def to_csv
 		CSV.generate do |csv|

@@ -7,12 +7,13 @@ module Studentable
 	end
 
 	def index
-		@students = Student.joins(:classroom).where("classrooms.school_id = ? " , @school)
+		@students = Student.joins(:classroom).where("classrooms.school_id = ? " , @school).order(:created_at)
 		@schoolclass = @school.classrooms
 	end
 
 	def show
 		@studentclassroom = @student.classroom
+		@activities = Activity.where(student_id: params[:id])
 	end
 
 	def new
@@ -40,6 +41,7 @@ module Studentable
 	end
 
 	def update
+		Activity.create(activity_detail: "change his profile", student_id: params[:id], created_at: Time.now())
 		@schoolclassrooms = @school.classrooms.all
 		respond_to do |format|
 			if @student.update(student_params)

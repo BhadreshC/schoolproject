@@ -31,9 +31,13 @@
 			</tr>
 		</thead>
 		<tbody>
-					<tr>
-						<td><%= @student.created_at%></td>
-						<td>student come in school</td>
-					</tr>
+			<% @activities.each do |activity| %>
+				<tr>
+					<td><%= activity.created_at %></td>
+					<td><%= activity.activity_detail %></td>
+				</tr>
+			<% end %>
 		</tbody>
 	</table>
+<h4>
+

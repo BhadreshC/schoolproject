@@ -3,7 +3,6 @@ class ClassroomsController < ApplicationController
 	before_action :set_school
 	before_action :set_classroom, only: [:show, :edit, :update, :destroy,:updateclass]
 	before_action :check_session, :check_permission
-
 	def index
 		@classrooms = @school.classrooms
 	end
