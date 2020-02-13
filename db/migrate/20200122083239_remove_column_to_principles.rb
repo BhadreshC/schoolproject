@@ -6,5 +6,6 @@ class RemoveColumnToPrinciples < ActiveRecord::Migration[6.0]
 		remove_column :principles, :current_sign_in_ip, :string
 		remove_column :principles, :last_sign_in_ip, :string
 		remove_column :principles, :password_digest, :string
+		remove_column :principles, :usersname, :string
 	end
 end
