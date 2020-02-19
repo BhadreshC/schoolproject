@@ -86,10 +86,10 @@ ActiveRecord::Schema.define(version: 2020_02_13_103928) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "student_id"
-    t.string "Mobile_No"
+    t.integer "classroom_id"
+    t.string "MobileNo"
     t.string "qualification"
     t.string "gender", default: "Male"
-    t.integer "classroom_id"
     t.index ["classroom_id"], name: "index_teachers_on_classroom_id"
     t.index ["student_id"], name: "index_teachers_on_student_id"
   end

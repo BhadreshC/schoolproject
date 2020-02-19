@@ -15,7 +15,7 @@
 
 <p>
 	<strong>Moible No:</strong>
-	<%= @teacher.Mobile_No%>
+	<%= @teacher.MobileNo %>
 </p>
 
 <p>
@@ -35,3 +35,21 @@
 
 <%= link_to 'Edit', edit_school_teacher_path(@school, @teacher) %>|||
 <%= link_to 'Back', school_teachers_path(@school) %>
+
+<table align="center">
+	<marquee scrollamount="15"><h2>Teacher activities</h2></marquee>
+	<thead>
+		<tr>
+			<th>Date</th>
+			<th>activity</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @teacher_activities.each do |activity| %>
+			<tr>
+				<td><%= activity.created_at.strftime("%d %B %Y %R") %></td>
+				<td><%= activity.name %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
