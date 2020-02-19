@@ -31,13 +31,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			<% @activities.each do |activity| %>
+			<% @stud_activities.each do |activity| %>
 				<tr>
-					<td><%= activity.created_at %></td>
-					<td><%= activity.activity_detail %></td>
+					<td><%= activity.created_at.strftime("%d %B %Y %R") %></td>
+					<td><%= activity.name %></td>
 				</tr>
 			<% end %>
 		</tbody>
 	</table>
 <h4>
-

@@ -67,10 +67,16 @@ class ClassroomsController < ApplicationController
 
 	def updateclass
 		@selectedstudents = @classroom.students.where(id: params[:student_ids])
-		@updatedstudentlist = @selectedstudents.update_all(classroom_id: params[:classroom_id][:id])
+		puts @selectedstudents.as_json
+		@noofupdatedstd = @selectedstudents.update_all(classroom_id: params[:classroom_id][:id])
 		respond_to do |format|
-			if @updatedstudentlist
-				format.html { redirect_to school_classroom_path(@school, @classroom), notice: "#{@updatedstudentlist} students class successfully updated" }
+			if @noofupdatedstd
+				# puts @selectedstudents.as_json
+				@selectedstudents.each do |std|
+					@newclassroom = Classroom.find_by_id(params[:classroom_id][:id])
+					Activity.create_activity("student is passed from #{std.classroom.C_Name} to #{@newclassroom.C_Name}", std)
+				end
+				format.html { redirect_to school_classroom_path(@school, @classroom), notice: "#{@noofupdatedstd} students class successfully updated" }
 				format.json { render :show, status: :ok, location: @classroom }
 			else
 				format.html { redirect_to upgradeclass_school_classroom_path(@school, @classroom), notice: 'Something went wrong'}

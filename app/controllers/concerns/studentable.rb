@@ -13,7 +13,7 @@ module Studentable
 
 	def show
 		@studentclassroom = @student.classroom
-		@activities = Activity.where(student_id: params[:id])
+		@stud_activities = Activity.where(activeable_id: params[:id])
 	end
 
 	def new
@@ -28,6 +28,7 @@ module Studentable
 	def create
 		@schoolclassrooms = @school.classrooms.all
 		@student = Student.new(student_params)
+		Activity.create_activity("#{@student.name} get the admission", @student)
 		@schoolclassrooms = @school.classrooms.all
 		respond_to do |format|
 			if @student.save
@@ -41,10 +42,23 @@ module Studentable
 	end
 
 	def update
-		Activity.create(activity_detail: "change his profile", student_id: params[:id], created_at: Time.now())
 		@schoolclassrooms = @school.classrooms.all
 		respond_to do |format|
 			if @student.update(student_params)
+				if @student.saved_change_to_name?
+					Activity.create_activity("update name from  #{@student.name_before_last_save} to  #{@student.name}" , @student)
+				end
+
+				if @student.saved_change_to_email?
+					Activity.create_activity("update email from  #{@student.email_before_last_save} to  #{@student.email}" , @student)
+				end
+				# if @student.saved_change_to_classroom_id?
+				# 	@abc = @student.classroom_id_before_last_save
+				# 	@defg = @student.classroom_id
+				# 	@cc = Classroom.where(id: @abc).first
+				# 	@dd = Classroom.where(id: @defg).first
+				# 	Activity.create_activity("passed form  #{@cc.C_Name} to  #{@dd.C_Name}" , @student)
+				# end
 				format.html { redirect_to school_student_path(@school, @student), notice: 'Student was successfully updated.' }
 				format.json { render :show, status: :ok, location: @student }
 			else
