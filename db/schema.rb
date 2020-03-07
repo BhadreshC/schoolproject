@@ -20,13 +20,6 @@ ActiveRecord::Schema.define(version: 2020_02_13_103928) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "class_rooms", force: :cascade do |t|
-    t.string "C_Name"
-    t.integer "wichstandard"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "classrooms", force: :cascade do |t|
     t.string "C_Name"
     t.integer "standard"
@@ -42,7 +35,6 @@ ActiveRecord::Schema.define(version: 2020_02_13_103928) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "school_id"
-    t.boolean "status", default: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -53,6 +45,7 @@ ActiveRecord::Schema.define(version: 2020_02_13_103928) do
     t.string "unconfirmed_email"
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
+    t.boolean "status", default: false
     t.index ["confirmation_token"], name: "index_principles_on_confirmation_token", unique: true
     t.index ["reset_password_token"], name: "index_principles_on_reset_password_token", unique: true
     t.index ["school_id"], name: "index_principles_on_school_id"
@@ -86,10 +79,10 @@ ActiveRecord::Schema.define(version: 2020_02_13_103928) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "student_id"
-    t.integer "classroom_id"
     t.string "MobileNo"
     t.string "qualification"
     t.string "gender", default: "Male"
+    t.integer "classroom_id"
     t.index ["classroom_id"], name: "index_teachers_on_classroom_id"
     t.index ["student_id"], name: "index_teachers_on_student_id"
   end

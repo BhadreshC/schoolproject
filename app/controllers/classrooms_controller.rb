@@ -4,7 +4,7 @@ class ClassroomsController < ApplicationController
 	before_action :set_classroom, only: [:show, :edit, :update, :destroy,:updateclass]
 	before_action :check_session, :check_permission
 	def index
-		@classrooms = @school.classrooms
+		@classrooms = @school.classrooms.order(:standard)
 	end
 
 	def show
@@ -66,7 +66,13 @@ class ClassroomsController < ApplicationController
 	end
 
 	def updateclass
+		# puts params[:classroom_id][:id]
 		@selectedstudents = @classroom.students.where(id: params[:student_ids])
+		@teachers = Teacher.where(classroom_id: params[:classroom_id][:id])
+		puts @teachers.as_json
+		@teachers.each do |t|
+			t.students << @selectedstudents
+		end
 		puts @selectedstudents.as_json
 		@noofupdatedstd = @selectedstudents.update_all(classroom_id: params[:classroom_id][:id])
 		respond_to do |format|
@@ -74,9 +80,9 @@ class ClassroomsController < ApplicationController
 				# puts @selectedstudents.as_json
 				@selectedstudents.each do |std|
 					@newclassroom = Classroom.find_by_id(params[:classroom_id][:id])
-					Activity.create_activity("student is passed from #{std.classroom.C_Name} to #{@newclassroom.C_Name}", std)
+					Activity.create_activity("#{std.name }is passed from #{std.classroom.C_Name} to #{@newclassroom.C_Name}", std)
 				end
-				format.html { redirect_to school_classroom_path(@school, @classroom), notice: "#{@noofupdatedstd} students class successfully updated" }
+				format.html { redirect_to school_classroom_path(@school, @classroom), notice: "#{@noofupdatedstd} students passed " }
 				format.json { render :show, status: :ok, location: @classroom }
 			else
 				format.html { redirect_to upgradeclass_school_classroom_path(@school, @classroom), notice: 'Something went wrong'}

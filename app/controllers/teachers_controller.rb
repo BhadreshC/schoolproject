@@ -10,7 +10,7 @@ class TeachersController < ApplicationController
 	end
 
 	def show
-		@teacher_activities = Activity.where(activeable_id: params[:id])
+		@teacher_activities = Activity.where(activeable_id: params[:id], activeable_type: "Teacher")
 	end
 
 	def new
@@ -23,8 +23,12 @@ class TeachersController < ApplicationController
 	end
 
 	def create
-		@schoolclassrooms = @school.classrooms.all
 		@teacher = Teacher.new(teacher_params)
+		@stud = Student.where(classroom_id: params[:teacher][:classroom_id])
+		@stud.each do |s|
+			s.teachers << @teacher
+		end
+		@schoolclassrooms = @school.classrooms.all
 		Activity.create_activity("new teacher is #{@teacher.name}", @teacher)
 		respond_to do |format|
 			if @teacher.save
@@ -55,7 +59,7 @@ class TeachersController < ApplicationController
 				end
 
 				if @teacher.saved_change_to_MobileNo?
-					Activity.create_activity("update qualification from  #{@teacher.MobileNo_before_last_save} to  #{@teacher.MobileNo}" , @teacher)
+					Activity.create_activity("update Mobile No. from  #{@teacher.MobileNo_before_last_save} to  #{@teacher.MobileNo}" , @teacher)
 				end
 				format.html { redirect_to school_teacher_path(@school, @teacher), notice: 'Teacher was successfully updated.' }
 				format.json { render :show, status: :ok, location: @teacher }
@@ -72,7 +76,7 @@ class TeachersController < ApplicationController
 			format.html { redirect_to school_teachers_url, notice: 'Teacher was successfully destroyed.' }
 			format.json { head :no_content }
 		end
-	end
+end
 
 	private
 		def set_school

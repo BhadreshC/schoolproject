@@ -7,13 +7,13 @@ module Studentable
 	end
 
 	def index
-		@students = Student.joins(:classroom).where("classrooms.school_id = ? " , @school).order(:created_at)
+		@students = Student.joins(:classroom).where("classrooms.school_id = ? " , @school).order(:standard)
 		@schoolclass = @school.classrooms
 	end
 
 	def show
 		@studentclassroom = @student.classroom
-		@stud_activities = Activity.where(activeable_id: params[:id])
+		@stud_activities = Activity.where(activeable_id: params[:id], activeable_type: "Student")
 	end
 
 	def new
@@ -26,8 +26,12 @@ module Studentable
 	end
 
 	def create
-		@schoolclassrooms = @school.classrooms.all
 		@student = Student.new(student_params)
+		@tech = Teacher.where(classroom_id: params[:student][:classroom_id])
+		@tech.each do |t|
+			t.students << @student
+		end
+		@schoolclassrooms = @school.classrooms.all
 		Activity.create_activity("#{@student.name} get the admission", @student)
 		@schoolclassrooms = @school.classrooms.all
 		respond_to do |format|
@@ -48,17 +52,9 @@ module Studentable
 				if @student.saved_change_to_name?
 					Activity.create_activity("update name from  #{@student.name_before_last_save} to  #{@student.name}" , @student)
 				end
-
 				if @student.saved_change_to_email?
 					Activity.create_activity("update email from  #{@student.email_before_last_save} to  #{@student.email}" , @student)
 				end
-				# if @student.saved_change_to_classroom_id?
-				# 	@abc = @student.classroom_id_before_last_save
-				# 	@defg = @student.classroom_id
-				# 	@cc = Classroom.where(id: @abc).first
-				# 	@dd = Classroom.where(id: @defg).first
-				# 	Activity.create_activity("passed form  #{@cc.C_Name} to  #{@dd.C_Name}" , @student)
-				# end
 				format.html { redirect_to school_student_path(@school, @student), notice: 'Student was successfully updated.' }
 				format.json { render :show, status: :ok, location: @student }
 			else
