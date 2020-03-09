@@ -31,7 +31,7 @@ class TeachersController < ApplicationController
 		@schoolclassrooms = @school.classrooms.all
 		Activity.create_activity("new teacher is #{@teacher.name}", @teacher)
 		respond_to do |format|
-			if @teacher.save
+		if @teacher.save
 				format.html { redirect_to school_teacher_path(@school, @teacher), notice: 'Teacher was successfully created.' }
 				format.json { render :show, status: :created, location: @teacher }
 			else
@@ -43,24 +43,11 @@ class TeachersController < ApplicationController
 
 	def update
 		@schoolclassrooms = @school.classrooms.all
+		@teacher.attributes = teacher_params
+		change_val = @teacher.changes
 		respond_to do |format|
-			if @teacher.update(teacher_params)
-
-				if @teacher.saved_change_to_name?
-					Activity.create_activity("update name from  #{@teacher.name_before_last_save} to  #{@teacher.name}" , @teacher)
-				end
-
-				if @teacher.saved_change_to_email?
-					Activity.create_activity("update email from  #{@teacher.email_before_last_save} to  #{@teacher.email}" , @teacher)
-				end
-
-				if @teacher.saved_change_to_qualification?
-					Activity.create_activity("update qualification from  #{@teacher.qualification_before_last_save} to  #{@teacher.qualification}" , @teacher)
-				end
-
-				if @teacher.saved_change_to_MobileNo?
-					Activity.create_activity("update Mobile No. from  #{@teacher.MobileNo_before_last_save} to  #{@teacher.MobileNo}" , @teacher)
-				end
+			if @teacher.save
+				@teacher.changed_attributes(change_val, @teacher)
 				format.html { redirect_to school_teacher_path(@school, @teacher), notice: 'Teacher was successfully updated.' }
 				format.json { render :show, status: :ok, location: @teacher }
 			else

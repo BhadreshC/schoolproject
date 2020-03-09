@@ -12,4 +12,11 @@ class Student < ApplicationRecord
 			self.errors.add(:name, "Over limit of student in classroom")
 		end
 	end
+
+	def changed_attributes(update_value, student)
+		@change_attribute= update_value.keys
+		@change_attribute.each do |key|
+			Activity.create_activity("update  #{key} from #{update_value[key][0]} to #{update_value[key][1]}", student)
+		end
+	end
 end

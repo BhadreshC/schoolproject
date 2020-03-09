@@ -47,14 +47,11 @@ module Studentable
 
 	def update
 		@schoolclassrooms = @school.classrooms.all
+		@student.attributes = student_params
+		update_value = @student.changes
 		respond_to do |format|
-			if @student.update(student_params)
-				if @student.saved_change_to_name?
-					Activity.create_activity("update name from  #{@student.name_before_last_save} to  #{@student.name}" , @student)
-				end
-				if @student.saved_change_to_email?
-					Activity.create_activity("update email from  #{@student.email_before_last_save} to  #{@student.email}" , @student)
-				end
+			if @student.save
+				@student.changed_attributes(update_value, @student)
 				format.html { redirect_to school_student_path(@school, @student), notice: 'Student was successfully updated.' }
 				format.json { render :show, status: :ok, location: @student }
 			else
