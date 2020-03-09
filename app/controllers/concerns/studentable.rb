@@ -1,7 +1,7 @@
 module Studentable
 	extend ActiveSupport::Concern
 	included do
-		before_action :set_student, only: [:show, :edit, :update, :destroy]
+		before_action :set_student, only: [:show, :edit,:update,:destroy]
 		before_action :set_school
 		before_action :check_session, :check_permission
 	end
@@ -47,6 +47,7 @@ module Studentable
 	end
 
 	def update
+		params[:student].delete :classroom_id #delete classroom_id because by using inspect element can change classroom
 		@schoolclassrooms = @school.classrooms.all
 		@student.attributes = student_params
 		update_value = @student.changes
