@@ -22,7 +22,7 @@
 
 	<div class="field">
 		<%= form.label :classroom_id %>
-		<%= form.collection_select :classroom_id, @schoolclassrooms.order(:standard),:id, :C_Name, {:prompt => "--select classroom--"}, required: true , disabled: true%>
+		<%= form.collection_select :classroom_id, @schoolclassrooms.order(:standard),:id, :C_Name, {:prompt => "--select classroom--"}, required: true , disabled: @editclass_disabled %>
 	</div>
 
 	<div class="actions">

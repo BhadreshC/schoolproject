@@ -16,7 +16,9 @@ class Student < ApplicationRecord
 	def changed_attributes(update_value, student)
 		@change_attribute= update_value.keys
 		@change_attribute.each do |key|
-			Activity.create_activity("update  #{key} from #{update_value[key][0]} to #{update_value[key][1]}", student)
+			if key != "classroom_id"
+				Activity.create_activity("update  #{key} from #{update_value[key][0]} to #{update_value[key][1]}", student)
+			end
 		end
 	end
 end

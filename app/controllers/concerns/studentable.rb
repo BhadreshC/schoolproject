@@ -23,6 +23,7 @@ module Studentable
 
 	def edit
 		@schoolclassrooms = @school.classrooms.all
+		@editclass_disabled = "edit disable for classroom"
 	end
 
 	def create
