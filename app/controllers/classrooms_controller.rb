@@ -69,10 +69,6 @@ class ClassroomsController < ApplicationController
 		# puts params[:classroom_id][:id]
 		@selectedstudents = @classroom.students.where(id: params[:student_ids])
 		@teachers = Teacher.where(classroom_id: params[:classroom_id][:id])
-		puts @teachers.as_json
-		@teachers.each do |t|
-			t.students << @selectedstudents
-		end
 		puts @selectedstudents.as_json
 		@noofupdatedstd = @selectedstudents.update_all(classroom_id: params[:classroom_id][:id])
 		respond_to do |format|

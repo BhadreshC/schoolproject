@@ -19,20 +19,16 @@ class TeachersController < ApplicationController
 	end
 
 	def edit
-
 		@schoolclassrooms = @school.classrooms.all
 	end
 
 	def create
 		@teacher = Teacher.new(teacher_params)
 		@stud = Student.where(classroom_id: params[:teacher][:classroom_id])
-		@stud.each do |s|
-			s.teachers << @teacher
-		end
 		@schoolclassrooms = @school.classrooms.all
 		Activity.create_activity("new teacher is #{@teacher.name}", @teacher)
 		respond_to do |format|
-		if @teacher.save
+			if @teacher.save
 				format.html { redirect_to school_teacher_path(@school, @teacher), notice: 'Teacher was successfully created.' }
 				format.json { render :show, status: :created, location: @teacher }
 			else

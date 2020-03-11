@@ -14,6 +14,11 @@
 </p>
 
 <p>
+	<strong>No of teachers:</strong>
+	<%= @student.classroom.teachers.count %>
+</p>
+
+<p>
 	<strong>classroom:</strong>
 	<%= link_to "#{@studentclassroom.C_Name}", school_classroom_path(@school, @student.classroom) %>
 </p>

@@ -29,9 +29,6 @@ module Studentable
 	def create
 		@student = Student.new(student_params)
 		@tech = Teacher.where(classroom_id: params[:student][:classroom_id])
-		@tech.each do |t|
-			t.students << @student
-		end
 		@schoolclassrooms = @school.classrooms.all
 		Activity.create_activity("#{@student.name} get the admission", @student)
 		@schoolclassrooms = @school.classrooms.all
