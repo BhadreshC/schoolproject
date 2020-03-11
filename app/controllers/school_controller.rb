@@ -38,9 +38,11 @@ class SchoolController < ApplicationController
 
 		def check_permission
 			if current_principle
-				@principles = @school.principles
-				if @principles.exists?(current_principle.id) or not_found
-				end
+				@principles = @school.principles.find_by(id: current_principle.id)
+				# @principles = @school.principles
+				not_found if @principles.blank?
+				# if @principles.exists?(current_principle.id) or not_found
+				# end
 			end
 		end
 end

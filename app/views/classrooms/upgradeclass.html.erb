@@ -8,16 +8,16 @@
 				<th>
 					<div class="field">
 						<%= label_tag 'standard' %>
-						<%= collection_select :classroom_id, :id, @classrooms.where("standard > ?" , @classroom.standard), :id, :C_Name,{:prompt => "--select classroom--"}, required: true %>
+						<%= collection_select :classroom_id, :id, @classrooms.where("standard > ?" , @classroom.standard).order(:standard), :id, :C_Name,{:prompt => "--select classroom--"}, required: true %>
 					</div>
 				</th>
 			</tr>
 		</thead>
 		<tbody>
-			<% if @studname.empty? %>
+			<% if @classstudents.empty? %>
 				<td><h4>Oppsss!!, No students are available</h4></td>
 			<% else %>
-				<% @studname.each do |student| %>
+				<% @classstudents.each do |student| %>
 					<tr>
 						<td><%= check_box_tag "student_ids[]", student.id, false %></td>
 						<td><%= student.name %></td>
@@ -26,7 +26,7 @@
 			<% end %>
 		</tbody>
 	</table>
-	<% if !@studname.empty? %>
+	<% if !@classstudents.empty? %>
 		<div class="actions">
 			<%= submit_tag "update student classroom"%>
 			<%= button_tag "Reset", type: :reset %>

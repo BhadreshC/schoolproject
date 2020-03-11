@@ -1,19 +1,16 @@
 module Checksession
+	#check principles session for login
 	def check_session
-		if current_principle
-		else
-			redirect_to  root_url, notice: 'login is required.'
-		end
+		# if current_principle
+		# else
+		# 	redirect_to  root_url, notice: 'login is required.'
+		# end
 	end
 
+	#check permission for direct access of other school
 	def check_permission
-		begin
-			@principles = @school.principles
-			rescue ActiveRecord::RecordNotFound
-				redirect_to :controller => "classroom", :action => "index"
-			return
-		end
-		if @principles.exists?(current_principle.id) or not_found
-		end
+		# @principles = @school.principles.find_by(id: current_principle.id)
+		# not_found if @principles.blank?
 	end
 end
+

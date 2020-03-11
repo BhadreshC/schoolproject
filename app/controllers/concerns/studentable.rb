@@ -7,7 +7,7 @@ module Studentable
 	end
 
 	def index
-		@students = Student.joins(:classroom).where("classrooms.school_id = ? " , @school).order(:standard)
+		@students = Student.includes(:classroom).where("classrooms.school_id = ? " , @school).references(:classroom)
 		@schoolclass = @school.classrooms
 	end
 
@@ -28,10 +28,8 @@ module Studentable
 
 	def create
 		@student = Student.new(student_params)
-		@tech = Teacher.where(classroom_id: params[:student][:classroom_id])
 		@schoolclassrooms = @school.classrooms.all
 		Activity.create_activity("#{@student.name} get the admission", @student)
-		@schoolclassrooms = @school.classrooms.all
 		respond_to do |format|
 			if @student.save
 				format.html { redirect_to school_student_path(@school, @student), notice: 'Student was successfully created.' }
@@ -44,7 +42,7 @@ module Studentable
 	end
 
 	def update
-		params[:student].delete :classroom_id #delete classroom_id because by using inspect element can change classroom
+		params[:student].delete :classroom_id
 		@schoolclassrooms = @school.classrooms.all
 		@student.attributes = student_params
 		update_value = @student.changes

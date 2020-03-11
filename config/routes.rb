@@ -11,10 +11,10 @@ Rails.application.routes.draw do
 				get :upgradeclass
 				post :upgradeclass
 				post :updateclass
-				end
+			end
 		end
 		resources :students
 		resources :teachers
-		end
+	end
 	match '*a', :to => 'errors#routing', via: :get
 end

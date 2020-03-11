@@ -4,7 +4,9 @@ class Classroom < ApplicationRecord
 	has_many :teachers, dependent: :destroy
 	belongs_to :school
 	validates :C_Name, presence: true, uniqueness: {scope: :school_id }
-	validates :standard, length: {minimum: 1, maximum: 12}, allow_blank: false, presence: true
+	validates :standard, inclusion: 1..12, allow_blank: false, presence: true
+
+	#for download csv file for particular classroom
 	def to_csv
 		CSV.generate do |csv|
 			csv << ["name", "email", "standard", "created_at","updated_at"]

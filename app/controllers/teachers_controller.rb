@@ -5,8 +5,8 @@ class TeachersController < ApplicationController
 	before_action :check_session, :check_permission
 
 	def index
-		@teachers = Teacher.joins(:classroom).where("classrooms.school_id = ? " , @school)
-		@schoolclass = @school.classrooms
+		@teachers = Teacher.includes(:classroom).where("classrooms.school_id = ? " , @school).references(:classroom)
+		@scount = Student.includes(:classroom).joins(:teachers).where("classrooms.school_id = ? " , @school).group('teachers.id').count
 	end
 
 	def show
@@ -24,7 +24,6 @@ class TeachersController < ApplicationController
 
 	def create
 		@teacher = Teacher.new(teacher_params)
-		@stud = Student.where(classroom_id: params[:teacher][:classroom_id])
 		@schoolclassrooms = @school.classrooms.all
 		Activity.create_activity("new teacher is #{@teacher.name}", @teacher)
 		respond_to do |format|
@@ -60,7 +59,7 @@ class TeachersController < ApplicationController
 			format.html { redirect_to school_teachers_url, notice: 'Teacher was successfully destroyed.' }
 			format.json { head :no_content }
 		end
-end
+	end
 
 	private
 		def set_school

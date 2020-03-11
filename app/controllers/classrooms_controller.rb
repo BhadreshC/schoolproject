@@ -3,16 +3,15 @@ class ClassroomsController < ApplicationController
 	before_action :set_school
 	before_action :set_classroom, only: [:show, :edit, :update, :destroy,:updateclass]
 	before_action :check_session, :check_permission
+
 	def index
 		@classrooms = @school.classrooms.order(:standard)
 	end
 
 	def show
-		@classrooms= @school.classrooms
-		@classroom = @classrooms.find_by_id(params[:id])
-		@totalstudent = 5
-		@classstudents=@classrooms.find_by_id(params[:id]).students
-		@classteachers=@classrooms.find_by_id(params[:id]).teachers
+		@totalstudent = 50
+		@classstudents=@classroom.students
+		@classteachers=@classroom.teachers
 		respond_to do |format|
 			format.html
 			format.csv { send_data @classroom.to_csv, filename: "classrooms-#{Date.today}.csv" }
@@ -61,24 +60,20 @@ class ClassroomsController < ApplicationController
 	def upgradeclass
 		@classrooms= @school.classrooms
 		@classroom = @classrooms.find_by_id(params[:id])
-		@classstudents=@classrooms.find_by_id(params[:id]).students
-		@studname=@classstudents
+		@classstudents= @classroom.students
 	end
 
 	def updateclass
-		# puts params[:classroom_id][:id]
-		@selectedstudents = @classroom.students.where(id: params[:student_ids])
-		@teachers = Teacher.where(classroom_id: params[:classroom_id][:id])
-		puts @selectedstudents.as_json
-		@noofupdatedstd = @selectedstudents.update_all(classroom_id: params[:classroom_id][:id])
+		@passstudents = @classroom.students.where(id: params[:student_ids])
+		puts @passstudents
+		@totalpassstudent = @passstudents.update_all(classroom_id: params[:classroom_id][:id])
 		respond_to do |format|
-			if @noofupdatedstd
-				# puts @selectedstudents.as_json
-				@selectedstudents.each do |std|
+			if @totalpassstudent
+				@passstudents.each do |std|
 					@newclassroom = Classroom.find_by_id(params[:classroom_id][:id])
 					Activity.create_activity("#{std.name }is passed from #{std.classroom.C_Name} to #{@newclassroom.C_Name}", std)
 				end
-				format.html { redirect_to school_classroom_path(@school, @classroom), notice: "#{@noofupdatedstd} students passed " }
+				format.html { redirect_to school_classroom_path(@school, @classroom), notice: "#{@totalpassstudent} students passed " }
 				format.json { render :show, status: :ok, location: @classroom }
 			else
 				format.html { redirect_to upgradeclass_school_classroom_path(@school, @classroom), notice: 'Something went wrong'}
