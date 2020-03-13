@@ -20,6 +20,11 @@
 		<%= form.number_field :standard, required: true, within: 1..12 %>
 	</div>
 
+	<div class="field">
+		<%= form.label :studentlimit %>
+		<%= form.number_field :studentlimit, required: true, within: 1..50 %>
+	</div>
+
 	<div class="actions">
 		<%= form.submit %>
 	</div>

@@ -8,7 +8,7 @@
 				<th>
 					<div class="field">
 						<%= label_tag 'standard' %>
-						<%= collection_select :classroom_id, :id, @classrooms.where("standard > ?" , @classroom.standard).order(:standard), :id, :C_Name,{:prompt => "--select classroom--"}, required: true %>
+						<%= collection_select :classroom_id, :id, @classrooms.where("standard = ?" , @classroom.standard.next).order(:standard), :id, :C_Name, required: true %>
 					</div>
 				</th>
 			</tr>

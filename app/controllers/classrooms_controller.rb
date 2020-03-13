@@ -3,13 +3,11 @@ class ClassroomsController < ApplicationController
 	before_action :set_school
 	before_action :set_classroom, only: [:show, :edit, :update, :destroy,:updateclass]
 	before_action :check_session, :check_permission
-
 	def index
 		@classrooms = @school.classrooms.order(:standard)
 	end
 
 	def show
-		@totalstudent = 50
 		@classstudents=@classroom.students
 		@classteachers=@classroom.teachers
 		respond_to do |format|
@@ -66,19 +64,24 @@ class ClassroomsController < ApplicationController
 	def updateclass
 		@passstudents = @classroom.students.where(id: params[:student_ids])
 		puts @passstudents
-		@totalpassstudent = @passstudents.update_all(classroom_id: params[:classroom_id][:id])
-		respond_to do |format|
-			if @totalpassstudent
-				@passstudents.each do |std|
-					@newclassroom = Classroom.find_by_id(params[:classroom_id][:id])
-					Activity.create_activity("#{std.name }is passed from #{std.classroom.C_Name} to #{@newclassroom.C_Name}", std)
+		@newclassroom = Classroom.find_by_id(params[:classroom_id][:id])
+		@availablestudent = @newclassroom.studentlimit - @newclassroom.students.count
+		if @passstudents.count <= @availablestudent
+			@totalpassstudent = @classroom.students.where(id: params[:student_ids]).update_all(classroom_id: params[:classroom_id][:id])
+			respond_to do |format|
+				if !@totalpassstudent.blank?
+					@passstudents.each do |std|
+						Activity.create_activity("#{std.name }is passed from #{std.classroom.C_Name} to #{@newclassroom.C_Name}", std)
+					end
+					format.html { redirect_to school_classroom_path(@school, @classroom), notice: "#{@totalpassstudent} students passed " }
+					format.json { render :show, status: :ok, location: @classroom }
+				else
+					format.html { redirect_to upgradeclass_school_classroom_path(@school, @classroom), notice: 'Something went wrong'}
+					format.json { render json: @classroom.errors, status: :unprocessable_entity }
 				end
-				format.html { redirect_to school_classroom_path(@school, @classroom), notice: "#{@totalpassstudent} students passed " }
-				format.json { render :show, status: :ok, location: @classroom }
-			else
-				format.html { redirect_to upgradeclass_school_classroom_path(@school, @classroom), notice: 'Something went wrong'}
-				format.json { render json: @classroom.errors, status: :unprocessable_entity }
 			end
+		else
+			redirect_to upgradeclass_school_classroom_path(@school, @classroom), notice: "New classroom have #{@availablestudent} students space."
 		end
 	end
 
@@ -92,6 +95,6 @@ class ClassroomsController < ApplicationController
 		end
 
 		def classroom_params
-			params.require(:classroom).permit(:C_Name, :standard, :school_id)
+			params.require(:classroom).permit(:C_Name, :standard, :studentlimit, :school_id)
 		end
 end

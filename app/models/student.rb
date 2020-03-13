@@ -5,12 +5,13 @@ class Student < ApplicationRecord
 	validates :name, presence: true
 	validates :email, uniqueness: {scope: :classroom_id }, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 	validates :classroom_id, presence: true
-	validate :check_student_limit
+	validate :check_student_limit, on: :create
 
 	# set limit for number of students in classroom
 	def check_student_limit
-		if Student.where(classroom_id: self.classroom_id).count > 50
-			self.errors.add(:name, "Over limit of student in classroom")
+		@classroom = Classroom.where(id: self.classroom_id).first
+		if Student.where(classroom_id: self.classroom_id).count >= @classroom.studentlimit
+			self.errors.add(:base, "Oppss!!! classroom is full")
 		end
 	end
 

@@ -1,8 +1,8 @@
 module Studentable
 	extend ActiveSupport::Concern
 	included do
-		before_action :set_student, only: [:show, :edit,:update,:destroy]
 		before_action :set_school
+		before_action :set_student, only: [:show, :edit,:update,:destroy]
 		before_action :check_session, :check_permission
 	end
 
@@ -29,9 +29,9 @@ module Studentable
 	def create
 		@student = Student.new(student_params)
 		@schoolclassrooms = @school.classrooms.all
-		Activity.create_activity("#{@student.name} get the admission", @student)
 		respond_to do |format|
 			if @student.save
+				Activity.create_activity("#{@student.name} get the admission", @student)
 				format.html { redirect_to school_student_path(@school, @student), notice: 'Student was successfully created.' }
 				format.json { render :show, status: :created, location: @student }
 			else
@@ -72,7 +72,7 @@ module Studentable
 		end
 
 		def set_student
-			@student = Student.find_by(id: params[:id]) or not_found
+			@student = Student.joins(:classroom).where("classrooms.school_id = ? AND students.id = ?", @school.id, params[:id]).first or not_found
 		end
 
 		def student_params

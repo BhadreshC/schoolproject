@@ -1,7 +1,7 @@
 class TeachersController < ApplicationController
 	include Checksession
-	before_action :set_teacher, only: [:show, :edit, :update, :destroy]
 	before_action :set_school
+	before_action :set_teacher, only: [:show, :edit, :update, :destroy]
 	before_action :check_session, :check_permission
 
 	def index
@@ -25,9 +25,9 @@ class TeachersController < ApplicationController
 	def create
 		@teacher = Teacher.new(teacher_params)
 		@schoolclassrooms = @school.classrooms.all
-		Activity.create_activity("new teacher is #{@teacher.name}", @teacher)
 		respond_to do |format|
 			if @teacher.save
+				Activity.create_activity("new teacher is #{@teacher.name}", @teacher)
 				format.html { redirect_to school_teacher_path(@school, @teacher), notice: 'Teacher was successfully created.' }
 				format.json { render :show, status: :created, location: @teacher }
 			else
@@ -67,7 +67,7 @@ class TeachersController < ApplicationController
 		end
 
 		def set_teacher
-			@teacher = Teacher.find_by(id: params[:id]) or not_found
+			@teacher = Teacher.joins(:classroom).where("classrooms.school_id = ? AND teachers.id = ?", @school.id, params[:id]).first or not_found
 		end
 
 		def teacher_params

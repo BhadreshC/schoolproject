@@ -4,11 +4,11 @@
 	<%= @classroom.C_Name %> ||
 	<strong>standard:</strong>
 	<%= @classroom.standard %> ||
-	<strong>Limit of students: <%= @totalstudent %></strong> ||
-	<strong>available students:</strong>
+	<strong>Limit of students: <%= @classroom.studentlimit %></strong> ||
+	<strong>number of students:</strong>
 	<%= @classroom.students.count%>||
 	<strong>remaining students:</strong>
-	<%= @totalstudent-@classroom.students.count %> &emsp;
+	<%= @classroom.studentlimit-@classroom.students.count %> &emsp;
 	<%= link_to "<button type='button'>Upgrade class</button>".html_safe, upgradeclass_school_classroom_path(@school, @classroom) %>
 </h3>
 <div class="row" >
